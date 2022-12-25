@@ -22,8 +22,7 @@
                 </a>
             </div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect"
-                id="vertical-menu-btn">
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
                 <i class="ri-menu-2-line align-middle"></i>
             </button>
 
@@ -34,7 +33,7 @@
                     <span class="ri-search-line"></span>
                 </div>
             </form>
-            
+
             <!--
             <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
@@ -174,9 +173,8 @@
         <div class="d-flex">
 
             <div class="dropdown d-inline-block d-lg-none ms-2">
-                <button type="button" class="btn header-item noti-icon waves-effect"
-                    id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="ri-search-line"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -195,7 +193,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <!--
             <div class="dropdown d-none d-sm-inline-block">
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
@@ -278,13 +276,13 @@
                 </div>
             </div>
             -->
-            
+
             <div class="dropdown d-none d-lg-inline-block ms-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" onclick="<?= base_url(session('role') . '/workingcalendar') ?>">
-                    <i class="ri-calendar-todo-line"><?php echo(date("m/d/y-h:ia")); ?></i>
+                <button type="button" class="btn header-item noti-icon waves-effect" onclick="show()">
+                    <i class="ri-calendar-todo-line"></i>
                 </button>
             </div>
-            
+
             <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="ri-fullscreen-line"></i>
@@ -328,8 +326,8 @@
                         </a>
                         <a href="" class="text-reset notification-item">
                             <div class="d-flex">
-                                <img src="assets/images/users/avatar-3.jpg"
-                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                <img src="assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs"
+                                    alt="user-pic">
                                 <div class="flex-1">
                                     <h6 class="mt-0 mb-1">James Lemire</h6>
                                     <div class="font-size-12 text-muted">
@@ -358,8 +356,8 @@
 
                         <a href="" class="text-reset notification-item">
                             <div class="d-flex">
-                                <img src="assets/images/users/avatar-4.jpg"
-                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                <img src="assets/images/users/avatar-4.jpg" class="me-3 rounded-circle avatar-xs"
+                                    alt="user-pic">
                                 <div class="flex-1">
                                     <h6 class="mt-0 mb-1">Salena Layfield</h6>
                                     <div class="font-size-12 text-muted">
@@ -401,10 +399,11 @@
                         screen</a>
                     -->
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="<?= base_url(session('role').'/logout'); ?>"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                    <a class="dropdown-item text-danger" href="<?= base_url(session('role').'/logout'); ?>"><i
+                            class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                 </div>
             </div>
-            
+
             <!--
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
@@ -415,4 +414,53 @@
 
         </div>
     </div>
+
+
 </header>
+
+<div class="modal bs-example-modal-xll" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Calendar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="calendar"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<?= $this->include('layouts/script') ?>
+
+<script type="text/javascript">
+var events = <?php echo json_encode($events) ?>;
+
+var date = new Date()
+var d = date.getDate(),
+    m = date.getMonth(),
+    y = date.getFullYear()
+
+function show() {
+    $('.bs-example-modal-xll').modal('show');
+}
+$('#calendar').fullCalendar({
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    buttonText: {
+        today: 'today',
+        month: 'month',
+        week: 'week',
+        day: 'day'
+    },
+    events: events
+})
+</script>
