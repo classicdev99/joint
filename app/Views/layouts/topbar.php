@@ -278,7 +278,7 @@
             -->
 
             <div class="dropdown d-none d-lg-inline-block ms-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" onclick="show()">
+                <button type="button" class="btn header-item noti-icon waves-effect" onclick="showCalendar()">
                     <i class="ri-calendar-todo-line"></i>
                 </button>
             </div>
@@ -435,30 +435,3 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-
-<?= $this->include('layouts/script') ?>
-
-<script type="text/javascript">
-var date = new Date()
-var d = date.getDate(),
-    m = date.getMonth(),
-    y = date.getFullYear()
-
-function show() {
-    $('.bs-example-modal-xll').modal('show');
-}
-$('#calendar').fullCalendar({
-    header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-    },
-    buttonText: {
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day'
-    },
-    // events: events
-})
-</script>

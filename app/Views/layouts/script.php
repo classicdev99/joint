@@ -116,3 +116,28 @@ var Utility = function() {
 
 var util = new Utility();
 </script>
+
+<script type="text/javascript">
+var date = new Date()
+var d = date.getDate(),
+    m = date.getMonth(),
+    y = date.getFullYear()
+
+function showCalendar() {
+    $('.bs-example-modal-xll').modal('show');
+}
+$('#calendar').fullCalendar({
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    buttonText: {
+        today: 'today',
+        month: 'month',
+        week: 'week',
+        day: 'day'
+    },
+
+})
+</script>
