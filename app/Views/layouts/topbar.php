@@ -439,8 +439,6 @@
 <?= $this->include('layouts/script') ?>
 
 <script type="text/javascript">
-var events = <?php echo json_encode($events) ?>;
-
 var date = new Date()
 var d = date.getDate(),
     m = date.getMonth(),
@@ -461,6 +459,6 @@ $('#calendar').fullCalendar({
         week: 'week',
         day: 'day'
     },
-    events: events
+    // events: events
 })
 </script>
