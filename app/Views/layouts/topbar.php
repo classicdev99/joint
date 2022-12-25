@@ -281,7 +281,7 @@
             
             <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" onclick="<?= base_url(session('role') . '/workingcalendar') ?>">
-                    <i class="ri-calendar-todo-line"></i>
+                    <i class="ri-calendar-todo-line"><?php echo(date("m/d/y-h:ia")); ?></i>
                 </button>
             </div>
             

@@ -143,6 +143,7 @@ $routes->group('staff', static function ($routes) {
         $routes->get('delete/(:num)', 'QuoteController::Quote_delete/$1', ['filter' => 'authGuard']);
         $routes->post('add_submit', 'QuoteController::save_Quote', ['filter' => 'authGuard']);
         $routes->post('edit_submit/(:num)', 'QuoteController::update_Quote/$1', ['filter' => 'authGuard']);
+        $routes->post('change_currency', 'QuoteController::change_currency', ['filter' => 'authGuard']);
     });
 
     $routes->group('Orders', static function ($routes) {

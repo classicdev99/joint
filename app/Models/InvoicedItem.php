@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Quotes extends Model
+class InvoicedItem extends Model
 {
    protected $DBGroup          = 'default';
-    protected $table            = 'quotes';
+    protected $table            = 'invoiced_items';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -43,13 +43,11 @@ class Quotes extends Model
     public function index($postData)
     {
         $query = $this->db->table($this->table)->insert($postData);
-        $insert_id = $this->db->insertID();
-
-        return  $insert_id;
-        //return $query;
+   
+        return $query;
     }
 
-    public function getQuotes($id = false)
+    public function getInvoicedItems($id = false)
     {
         if ($id === false) {
             return $this->findAll();
@@ -58,21 +56,33 @@ class Quotes extends Model
         }
     }
 
-    public function deleteQuotes($id)
+    public function deleteInvoicedItem($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
 
-    public function editQuotes($id)
+    public function editInvoicedItems($id)
     {
         $query = $this->find($id);
         return $query;
     }
 
-    public function upadteQuotes($id, $postData)
+    public function updateInvoicedItems($id, $postData)
     {
         $query = $this->db->table($this->table)->update($postData, array('id' => $id));
         return $query;
+    }
+
+    public function getQuoteItems($quote_id)
+    {
+    //    return $this->findAll();
+
+        return $this->where('quote_id',$quote_id)->findAll();
+    }
+
+    public function deleteQuoteItems($quote_id)
+    {
+        return $this->where('quote_id',$quote_id)->delete();
     }
 }

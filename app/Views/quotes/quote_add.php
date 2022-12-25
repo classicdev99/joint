@@ -7,65 +7,65 @@
     <!-- CSS only -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
     <style>
-        .myTable input {
-            width: 100px;
-        }
+    .myTable input {
+        width: 100px;
+    }
 
-        .invoice-table th {
-            text-align: center;
-        }
+    .invoice-table th {
+        text-align: center;
+    }
 
-        .invoice-fields-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
+    .invoice-fields-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
 
-        .form-control:disabled {
-            background: #f6f6f6 !important;
-        }
+    .form-control:disabled {
+        background: #f6f6f6 !important;
+    }
 
+    .invoice-fields .form-group label {
+        display: inline-block;
+        width: 240px;
+    }
+
+    .invoice-fields .form-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0px;
+    }
+
+    a.btn.cst-btn.btn-primary {
+        background: #9cd6ff8f;
+        color: #0d6efd;
+        line-height: 23px;
+    }
+
+    @media (max-width: 420px) {
         .invoice-fields .form-group label {
-            display: inline-block;
-            width: 240px;
+            display: block;
+            width: 100%;
         }
 
         .invoice-fields .form-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 15px 0px;
+            display: block;
         }
 
-        a.btn.cst-btn.btn-primary {
-            background: #9cd6ff8f;
-            color: #0d6efd;
-            line-height: 23px;
+        .invoice-fields {
+            width: 100%;
         }
 
-        @media (max-width: 420px) {
-            .invoice-fields .form-group label {
-                display: block;
-                width: 100%;
-            }
+    }
 
-            .invoice-fields .form-group {
-                display: block;
-            }
-
-            .invoice-fields {
-                width: 100%;
-            }
-
+    @media (max-width: 991px) {
+        .table-responsive .invoice-table th {
+            font-size: 12px;
         }
-
-        @media (max-width: 991px) {
-            .table-responsive .invoice-table th {
-                font-size: 12px;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -95,7 +95,9 @@
                                         <div class="d-flex flex-row-reverse">
                                             <input type="submit" value="Save" class="btn btn-primary mb-3">
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/quotes') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel create quotes?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/quotes') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel create quotes?');">Cancel</a>
                                         </div>
 
                                         <div class="row mb-5">
@@ -149,7 +151,8 @@
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc['accountname'] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc['accountname'] ?>">
+                                                            <?= $acc['accountname'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -161,7 +164,7 @@
                                                 <label class="col-form-label">Payment Term</label>
                                                 <div class="input-group">
                                                     <select class="form-select" name="payment_term">
-                                                       <?php foreach($paymentterms as $key => $value) { ?>
+                                                        <?php foreach($paymentterms as $key => $value) { ?>
                                                         <option value="<?=$value['id'];?>"><?=$value['name'];?></option>
                                                         <?php } ?>
                                                     </select>
@@ -185,7 +188,8 @@
                                                         <?php
                                                         foreach ($contacts as $contact) {
                                                         ?>
-                                                            <option value="<?= $contact['lastName'] ?>"><?= $contact['lastName'] ?></option>
+                                                        <option value="<?= $contact['lastName'] ?>">
+                                                            <?= $contact['lastName'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -238,53 +242,82 @@
                                                 <h6 class="mb-3">Invoiced Items</h6>
 
                                                 <div class="table-responsive">
-                                                    <table class="invoice-table">
+                                                    <table class="invoice-table" id="invoice_table">
                                                         <thead>
                                                             <tr>
                                                                 <th>S.No</th>
                                                                 <th>Product Name</th>
-                                                                <th>List Price (MYR)</th>
+                                                                <th>List Price</th>
                                                                 <th>Quantity</th>
-                                                                <th>Amount (MYR)</th>
-                                                                <th>Discount (MYR)</th>
-                                                                <th>Tax (MYR)</th>
-                                                                <th>Total (MYR)</th>
+                                                                <th>Amount</th>
+                                                                <th>Discount</th>
+                                                                <th>Tax</th>
+                                                                <th>Total</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
+                                                            <tr id="addr0">
                                                                 <td>1</td>
                                                                 <td>
-                                                                    <textarea name="description" id="description" cols="30" rows="1" class="form-control" name="productName" placeholder="description"></textarea>
+                                                                    <textarea cols="30" rows="1" class="form-control"
+                                                                        name="productName0"
+                                                                        placeholder="description"></textarea>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="listPrice">
+                                                                    <input type="number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="listPrice0" id="listPrice0">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="quantity">
+                                                                    <input type=" number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="quantity0">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="amount">
+                                                                    <input type="number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="amount0">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" class="invoice-table-input form-control" name="discount">
+                                                                    <input type="number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="discount0">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" class="invoice-table-input form-control" name="tax">
+                                                                    <input type="number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="tax0">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="total">
+                                                                    <input type="number" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="total0">
                                                                 </td>
                                                             </tr>
+                                                            <tr id='addr1'></tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
 
                                                 <div class="invoice-fields-container">
                                                     <div class="btn-area">
-                                                        <a href="#" class="btn btn-primary cst-btn">+ Add Row</a>
+                                                        <a id="addrow" class="btn btn-primary cst-btn">+ Add Row</a>
                                                     </div>
-                                                    <div class="invoice-fields">
+                                                    <div class="col-md-2">
+                                                        <label class="col-form-label">Currency</label>
+                                                        <div class="input-group">
+                                                            <select name="currency_name" id="currency_name"
+                                                                class="form-select">
+                                                                <option value="0">MYR</option>
+                                                                <option value="1">USD</option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="col-form-label">Value in MYR</label>
+                                                        <input type="number" value="1" min="0.00" readonly
+                                                            class="invoice-table-input form-control"
+                                                            name="currency_value" id="currency_value">
+                                                    </div>
+                                                    <div class=" invoice-fields">
                                                         <div class="form-group">
                                                             <label>Sub Total (MYR)</label>
                                                             <input type="text" class="form-control" />
@@ -311,6 +344,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <h6 class="my-3">Internal Comment</h6>
@@ -318,7 +352,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Defect Comment</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="defect_comment" id="defect_comment">
+                                                    <input type="text" class="form-control" name="defect_comment"
+                                                        id="defect_comment">
                                                 </div>
                                             </div>
                                             <br>
@@ -326,7 +361,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Internal Comment</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="internal_comment" id="internal_comment">
+                                                    <input type="text" class="form-control" name="internal_comment"
+                                                        id="internal_comment">
                                                 </div>
 
                                             </div>
@@ -336,7 +372,8 @@
                                             <div class="col-md-8">
                                                 <label class="col-form-label">Term and Conditions</label>
                                                 <div class="input-group">
-                                                    <textarea name="term_condition" id="term_condition" cols="30" rows="4" class="form-control">-All the quoted on-site serving jobs are exluded PCR/Swab Test, Optional Charges @RM300/headcount
+                                                    <textarea name="term_condition" id="term_condition" cols="30"
+                                                        rows="4" class="form-control">-All the quoted on-site serving jobs are exluded PCR/Swab Test, Optional Charges @RM300/headcount
                                                   </textarea>
                                                 </div>
                                             </div>
@@ -345,68 +382,79 @@
                                             <div class="col-md-8">
                                                 <label class="col-form-label">Description</label>
                                                 <div class="input-group">
-                                                    <textarea name="description" id="description" cols="30" rows="2" class="form-control"></textarea>
+                                                    <textarea name="description" id="description" cols="30" rows="2"
+                                                        class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <h6 class="my-3">Address Information</h6>
                                             <div class="col-md-6 ">
                                                 <label class="col-form-label">Billing Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billing_street" id="billing_street">
+                                                    <input type="text" class="form-control" name="billing_street"
+                                                        id="billing_street">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_street" id="shipping_street	">
+                                                    <input type="text" class="form-control" name="shipping_street"
+                                                        id="shipping_street	">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing City</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="billing_city" name="billing_city">
+                                                    <input type="text" class="form-control" id="billing_city"
+                                                        name="billing_city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping City </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="shipping_city" name="shipping_city">
+                                                    <input type="text" class="form-control" id="shipping_city"
+                                                        name="shipping_city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing State</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="billing_state" name="billing_state">
+                                                    <input type="text" class="form-control" id="billing_state"
+                                                        name="billing_state">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping State</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_state" id="shipping_state">
+                                                    <input type="text" class="form-control" name="shipping_state"
+                                                        id="shipping_state">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing Code </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billling_code" id="billling_code">
+                                                    <input type="text" class="form-control" name="billling_code"
+                                                        id="billling_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Code</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_code" id="shipping_code">
+                                                    <input type="text" class="form-control" name="shipping_code"
+                                                        id="shipping_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing Country</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billing_country" id="billing_country">
+                                                    <input type="text" class="form-control" name="billing_country"
+                                                        id="billing_country">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Country </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_country" id="shipping_country">
+                                                    <input type="text" class="form-control" name="shipping_country"
+                                                        id="shipping_country">
                                                 </div>
                                             </div>
                                             <h6 class="mb-3">System info</h6>
@@ -414,7 +462,8 @@
                                             <div class="col-md-12">
                                                 <label class="col-form-label">Bee Owner</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="bee_owner" id="bee_owner">
+                                                    <input type="text" class="form-control" name="bee_owner"
+                                                        id="bee_owner">
                                                 </div>
                                             </div>
                                         </div>
@@ -437,6 +486,69 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
+
+    <script>
+    var i = 1;
+    $("#addrow").click(function() {
+
+        // var $tableBody = $('#invoice_table').find("tbody"),
+        // $trLast = $tableBody.find("tr:last"),
+        // $trNew = $trLast.clone();
+
+        // $trLast.after($trNew);
+        $('#addr' + i).html("<td>" + (i + 1) +
+            "</td><td><textarea cols='30' rows='1' class='form-control' name='productName" + i +
+            "'  placeholder='description'></textarea></td><td><input type='number' min='0' value='0' name='listPrice" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0'' name='quantity" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='amount" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='discount" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='tax" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
+            i +
+            "' class='invoice-table-input form-control'/></td>");
+
+        $('#invoice_table').append('<tr id="addr' + (i + 1) + '"></tr>');
+        i++;
+    });
+    var request_url = "<?= base_url(session('role') . '/quotes/change_currency') ?>";
+
+    $('#currency_name').on('focusin', function() {
+        $(this).data('old', $(this).val());
+    });
+    $("#currency_name").on('change', function() {
+        $.ajax({
+            url: request_url,
+            data: {
+                old: $(this).data('old'),
+                new: $(this).val()
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: function(result) {
+                $('#currency_value').val(result[0]);
+                var j = i;
+                for (; j >= 0; j--) {
+                    $val = $('#addr' + j).find("[name='listPrice" + j + "']").val();
+                    $('#addr' + j).find("[name='listPrice" + j + "']").val($val * result[1]);
+                    $val = $('#addr' + j).find("[name='amount" + j + "']").val();
+                    $('#addr' + j).find("[name='amount" + j + "']").val($val * result[1]);
+                    $val = $('#addr' + j).find("[name='discount" + j + "']").val();
+                    $('#addr' + j).find("[name='discount" + j + "']").val($val * result[1]);
+                    $val = $('#addr' + j).find("[name='tax" + j + "']").val();
+                    $('#addr' + j).find("[name='tax" + j + "']").val($val * result[1]);
+                    $val = $('#addr' + j).find("[name='total" + j + "']").val();
+                    $('#addr' + j).find("[name='total" + j + "']").val($val * result[1]);
+                }
+            }
+        });
+        $(this).data('old', $(this).val());
+    });
+    </script>
 </body>
 
 </html>
