@@ -320,27 +320,30 @@
                                                     <div class=" invoice-fields">
                                                         <div class="form-group">
                                                             <label>Sub Total (MYR)</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" id="sum_sub_total"
+                                                                class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Discount (MYR)</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" id="sum_discount" class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Tax (MYR)</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" id="sum_tax" class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Adjustment (MYR)</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" id="sum_adjustment"
+                                                                class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Grand Total (MYR)</label>
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" id="sum_grand_total"
+                                                                class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -489,6 +492,40 @@
 
     <script>
     var i = 1;
+
+    $.fn.updateSummary = function() {
+        var subTotal = 0;
+        var discount = 0;
+        var tax = 0;
+        var adjustment = 0;
+        var grandTotal = 0;
+        var j = i;
+        var val = 0;
+
+        for (; j >= 0; j--) {
+            val = $('#addr' + j).find("[name='total" + j + "']").val();
+            val = parseInt(val);
+            if (val > 0)
+                subTotal += parseInt(val);
+            val = $('#addr' + j).find("[name='discount" + j + "']").val();
+            val = parseInt(val);
+            if (val > 0)
+                discount += parseInt(val);
+            val = $('#addr' + j).find("[name='tax" + j + "']").val();
+            val = parseInt(val);
+            if (val > 0)
+                tax += parseInt(val);
+        }
+        adjustment = subTotal - tax;
+        grandTotal = subTotal - discount;
+
+        $('#sum_sub_total').val(subTotal);
+        $('#sum_discount').val(discount);
+        $('#sum_tax').val(tax);
+        $('#sum_adjustment').val(adjustment);
+        $('#sum_grand_total').val(grandTotal);
+    }
+
     $("#addrow").click(function() {
 
         // var $tableBody = $('#invoice_table').find("tbody"),
@@ -514,6 +551,7 @@
 
         $('#invoice_table').append('<tr id="addr' + (i + 1) + '"></tr>');
         i++;
+        $.fn.updateSummary();
     });
     var request_url = "<?= base_url(session('role') . '/quotes/change_currency') ?>";
 
@@ -544,6 +582,7 @@
                     $val = $('#addr' + j).find("[name='total" + j + "']").val();
                     $('#addr' + j).find("[name='total" + j + "']").val($val * result[1]);
                 }
+                $.fn.updateSummary();
             }
         });
         $(this).data('old', $(this).val());
