@@ -33,7 +33,9 @@
                                         <div class="d-flex flex-row-reverse">
                                             <input type="submit" value="Save" class="btn btn-primary mb-3">
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/product') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel create product?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/product') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel create product?');">Cancel</a>
                                         </div>
 
 
@@ -61,14 +63,16 @@
                                                 <label class="col-form-label">Product Name</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="product_name" id="product_name">
+                                                    <input type="text" class="form-control" name="product_name"
+                                                        id="product_name">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Product Code</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" id="product_code" name="product_code" class="form-control">
+                                                    <input type="text" id="product_code" name="product_code"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -89,7 +93,8 @@
                                                 <div class="input-group">
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="product_active" name="product_active">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="product_active" name="product_active">
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +117,8 @@
                                                 <label class="col-form-label">Product Category</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select class="form-select" name="product_category" id="product_category">
+                                                    <select class="form-select" name="product_category"
+                                                        id="product_category">
                                                         <option value="None" hidden>-None-</option>
                                                         <option value="product Category 1">product Category 1</option>
                                                         <option value="product Category 2">product Category 2</option>
@@ -124,21 +130,24 @@
                                                 <label class="col-form-label">Sales Start Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="date" id="sales_start" name="sales_start" class="form-control">
+                                                    <input type="date" id="sales_start" name="sales_start"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Sales End Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="date" id="sales_end" name="sales_end" class="form-control">
+                                                    <input type="date" id="sales_end" name="sales_end"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Support Start Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="date" id="support_start" name="support_start" class="form-control">
+                                                    <input type="date" id="support_start" name="support_start"
+                                                        class="form-control">
 
                                                 </div>
                                             </div>
@@ -146,14 +155,16 @@
                                                 <label class="col-form-label">Support End Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="date" id="support_end" name="support_end" class="form-control">
+                                                    <input type="date" id="support_end" name="support_end"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Product Item Group</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select class="form-select" name="product_item_group" id="product_item_group">
+                                                    <select class="form-select" name="product_item_group"
+                                                        id="product_item_group">
                                                         <option value="None" hidden>-None-</option>
                                                         <option value="product item 1">product item 1</option>
                                                         <option value="product item 2">product item 2</option>
@@ -168,7 +179,8 @@
                                                 <label class="col-form-label">Unit Price</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" id="unit_price" name="unit_price" class="form-control">
+                                                    <input type="text" id="unit_price" name="unit_price"
+                                                        class="form-control">
 
                                                 </div>
                                             </div>
@@ -184,7 +196,8 @@
                                                 <label class="col-form-label">Commission Rate</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input class="form-control" type="text" value="" id="commission_rate" name="commission_rate">
+                                                    <input class="form-control" type="text" value=""
+                                                        id="commission_rate" name="commission_rate">
 
 
                                                 </div>
@@ -194,7 +207,8 @@
                                                 <label class="col-form-label">Taxable</label>
                                                 <div class="input-group">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="taxable" name="taxable">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="taxable" name="taxable">
 
                                                     </div>
 
@@ -205,14 +219,16 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Delivery Date</label>
                                                 <div class="input-group">
-                                                    <input type="date" class="form-control" id="delivery_date" name="delivery_date">
+                                                    <input type="date" class="form-control" id="delivery_date"
+                                                        name="delivery_date">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Quantity Ordered</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="qty_order" name="qty_order">
+                                                    <input type="text" class="form-control" id="qty_order"
+                                                        name="qty_order">
                                                 </div>
                                             </div>
 
@@ -249,7 +265,8 @@
                                                 <div class="input-group">
                                                     <!-- <div class="input-group-prepend bg-danger" style="width:3px;"></div> -->
                                                     <!-- <div class="form-check form-switch"> -->
-                                                    <input class="form-control" type="text" id="" name="quantity_demand">
+                                                    <input class="form-control" type="text" id=""
+                                                        name="quantity_demand">
                                                     <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
                                                     <!-- </div> -->
                                                 </div>
@@ -270,7 +287,8 @@
                                             <div class="col-md-12">
                                                 <label class="col-form-label">Description</label>
                                                 <div class="input-group">
-                                                    <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                    <textarea name="description" id="" cols="30" rows="10"
+                                                        class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>

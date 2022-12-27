@@ -28,15 +28,20 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="<?= base_url(session('role') . '/quotes/add') ?>" class="btn btn-primary mb-3">Add Quotes</a>
-
+                                    <a href="<?= base_url(session('role') . '/quotes/add') ?>"
+                                        class="btn btn-primary mb-3">Add Quotes</a> &nbsp;
+                                    <a href="<?= base_url(session('role') . '/quotes') ?>"
+                                        class="btn btn-light mb-3">Refresh</a>
                                     <div class="table-rep-plugin">
                                         <div class="table-responsive mb-0" data-pattern="priority-columns">
-                                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <table id="datatable-buttons"
+                                                class="table table-striped table-bordered dt-responsive"
+                                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckDefault">
                                                         </th>
                                                         <th>Quotation Date</th>
                                                         <th>MSP Quote Number</th>
@@ -51,24 +56,32 @@
                                                 <tbody>
 
                                                     <?php foreach ($quotes as $row) : ?>
-                                                        <tr>
-                                                            <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                                                            <td>???</td>
-                                                            <td>???</td>
-                                                            <td><?= $row['subject'] ?></td>
-                                                            <td>???</td>
-                                                            <td><?= $row['account_name'] ?></td>
-                                                            <td>???</td>
-                                                            <td>???</td>
-                                                            <td>
-                                                                <a href="<?= base_url(session('role') . '/quotes/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm" title="Update quotes">
-                                                                    <i class='fas fa-edit'></i>
-                                                                </a>
-                                                                <a href="<?= base_url(session('role') . '/quotes/delete/' . $row['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?');">
-                                                                    <i class="fas fa-trash-alt" title="Delete Account"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td><input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckDefault"></td>
+                                                        <td>???</td>
+                                                        <td>???</td>
+                                                        <td><?= $row['subject'] ?></td>
+                                                        <td>???</td>
+                                                        <td><?= $row['account_name'] ?></td>
+                                                        <td>???</td>
+                                                        <td>???</td>
+                                                        <td>
+                                                            <a href="<?= base_url(session('role') . '/quotes/edit/' . $row['id']) ?>"
+                                                                class="btn btn-primary btn-sm" title="Update quotes">
+                                                                <i class='fas fa-edit'></i>
+                                                            </a>
+                                                            <a href="<?= base_url(session('role') . '/quotes/delete/' . $row['id']) ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Do you want to delete?');">
+                                                                <i class="fas fa-trash-alt" title="Delete Account"></i>
+                                                            </a>
+                                                            <a href="<?= base_url(session('role') . '/quotepdf/' . $row['id']) ?>"
+                                                                class="btn btn-success btn-sm">
+                                                                <i class="fas fa-download" title="Download"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>

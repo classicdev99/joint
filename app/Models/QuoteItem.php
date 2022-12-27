@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InvoicedItem extends Model
+class QuoteItem extends Model
 {
    protected $DBGroup          = 'default';
-    protected $table            = 'invoiced_items';
+    protected $table            = 'quote_items';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -47,7 +47,7 @@ class InvoicedItem extends Model
         return $query;
     }
 
-    public function getInvoicedItems($id = false)
+    public function getQuoteItems($id = false)
     {
         if ($id === false) {
             return $this->findAll();
@@ -56,32 +56,32 @@ class InvoicedItem extends Model
         }
     }
 
-    public function deleteInvoicedItem($id)
+    public function deleteQuoteItem($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
 
-    public function editInvoicedItems($id)
+    public function editQuoteItems($id)
     {
         $query = $this->find($id);
         return $query;
     }
 
-    public function updateInvoicedItems($id, $postData)
+    public function updateQuoteItems($id, $postData)
     {
         $query = $this->db->table($this->table)->update($postData, array('id' => $id));
         return $query;
     }
 
-    public function getQuoteItems($quote_id)
+    public function getItemsForQuote($quote_id)
     {
     //    return $this->findAll();
 
         return $this->where('quote_id',$quote_id)->findAll();
     }
 
-    public function deleteQuoteItems($quote_id)
+    public function deleteItemsForQuote($quote_id)
     {
         return $this->where('quote_id',$quote_id)->delete();
     }

@@ -140,4 +140,131 @@ $('#calendar').fullCalendar({
     },
 
 })
+
+function showProducts() {
+    $('.bs-example-modal-products').modal('show');
+}
+
+$('#invoice_table').find('.invoice-table-input').on("input", function() {
+    $.fn.updateSummary();
+});
+
+$("#addProducts").click(function() {
+    var index = 0;
+
+    $table = $('#products_table');
+    var message = "";
+    var productNames = []
+    $("#products_table input[type=checkbox]:checked").each(function() {
+        var row = $(this).closest("tr")[0];
+        productNames.push(row.cells[2].innerHTML);
+    });
+    if (productNames.length == 0) {
+        alert("Choose one product at least.");
+        return;
+    }
+    $('#invoice_table tbody').html("");
+    var i = 1;
+    for (; index < productNames.length; index++) {
+        // var i = $('#invoice_table tr:last').attr('id');
+        // i = parseInt(i.replace('addr', ''));
+        // var k = i + 1;
+        // i = '' + i;
+
+        $('#invoice_table').append('<tr id="addr' + i + '"></tr>');
+        $('#addr' + i).html("<td>" + (i) +
+            "</td><td><textarea cols='30' rows='1' class='form-control' name='productName" + i +
+            "'  placeholder='description'>" + productNames[index] +
+            "</textarea></td><td><input type='number' min='0' value='0' name='listPrice" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0'' name='quantity" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='amount" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='discount" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='tax" +
+            i +
+            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
+            i +
+            "' class='invoice-table-input form-control'/></td>");
+        i++;
+    }
+
+    $.fn.updateSummary();
+});
+
+
+
+$('#currency_name').on('focusin', function() {
+    $(this).data('old', $(this).val());
+});
+$("#currency_name").on('change', function() {
+    var currency_url = "<?= base_url(session('role') . '/quotes/change_currency') ?>";
+    var i = $('#invoice_table tr:last').attr('id');
+    i = parseInt(i.replace('addr', ''));
+    $.ajax({
+        url: currency_url,
+        data: {
+            old: $(this).data('old'),
+            new: $(this).val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $('#currency_value').val(result[0]);
+            var j = i;
+            for (; j >= 1; j--) {
+                $val = $('#addr' + j).find("[name='listPrice" + j + "']").val();
+                $('#addr' + j).find("[name='listPrice" + j + "']").val($val * result[1]);
+                $val = $('#addr' + j).find("[name='amount" + j + "']").val();
+                $('#addr' + j).find("[name='amount" + j + "']").val($val * result[1]);
+                $val = $('#addr' + j).find("[name='discount" + j + "']").val();
+                $('#addr' + j).find("[name='discount" + j + "']").val($val * result[1]);
+                $val = $('#addr' + j).find("[name='tax" + j + "']").val();
+                $('#addr' + j).find("[name='tax" + j + "']").val($val * result[1]);
+                $val = $('#addr' + j).find("[name='total" + j + "']").val();
+                $('#addr' + j).find("[name='total" + j + "']").val($val * result[1]);
+            }
+            $.fn.updateSummary();
+        }
+    });
+
+    $(this).data('old', $(this).val());
+});
+
+$.fn.updateSummary = function() {
+    var i = $('#invoice_table tr:last').attr('id');
+    i = parseInt(i.replace('addr', ''));
+    var subTotal = 0;
+    var discount = 0;
+    var tax = 0;
+    var adjustment = 0;
+    var grandTotal = 0;
+    var j = i;
+    var val = 0;
+
+    for (; j >= 0; j--) {
+        val = $('#addr' + j).find("[name='total" + j + "']").val();
+        val = parseInt(val);
+        if (val > 0)
+            subTotal += parseInt(val);
+        val = $('#addr' + j).find("[name='discount" + j + "']").val();
+        val = parseInt(val);
+        if (val > 0)
+            discount += parseInt(val);
+        val = $('#addr' + j).find("[name='tax" + j + "']").val();
+        val = parseInt(val);
+        if (val > 0)
+            tax += parseInt(val);
+    }
+    adjustment = subTotal - tax;
+    grandTotal = subTotal - discount;
+
+    $('#sum_sub_total').val(subTotal);
+    $('#sum_discount').val(discount);
+    $('#sum_tax').val(tax);
+    $('#sum_adjustment').val(adjustment);
+    $('#sum_grand_total').val(grandTotal);
+}
 </script>

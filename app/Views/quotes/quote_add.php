@@ -256,52 +256,52 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr id="addr0">
+                                                            <tr id="addr1">
                                                                 <td>1</td>
                                                                 <td>
                                                                     <textarea cols="30" rows="1" class="form-control"
-                                                                        name="productName0"
+                                                                        name="productName1"
                                                                         placeholder="description"></textarea>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="listPrice0" id="listPrice0">
+                                                                        name="listPrice1" id="listPrice1">
                                                                 </td>
                                                                 <td>
                                                                     <input type=" number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="quantity0">
+                                                                        name="quantity1">
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="amount0">
+                                                                        name="amount1">
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="discount0">
+                                                                        name="discount1">
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="tax0">
+                                                                        name="tax1">
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name="total0">
+                                                                        name="total1">
                                                                 </td>
                                                             </tr>
-                                                            <tr id='addr1'></tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
 
                                                 <div class="invoice-fields-container">
                                                     <div class="btn-area">
-                                                        <a id="addrow" class="btn btn-primary cst-btn">+ Add Row</a>
+                                                        <a onclick="showProducts()" class="btn btn-primary cst-btn">+
+                                                            Add Products</a>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <label class="col-form-label">Currency</label>
@@ -317,31 +317,31 @@
                                                             class="invoice-table-input form-control"
                                                             name="currency_value" id="currency_value">
                                                     </div>
-                                                    <div class=" invoice-fields">
+                                                    <div class="invoice-fields">
                                                         <div class="form-group">
-                                                            <label>Sub Total (MYR)</label>
+                                                            <label>Sub Total</label>
                                                             <input type="text" id="sum_sub_total"
                                                                 class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Discount (MYR)</label>
+                                                            <label>Discount</label>
                                                             <input type="text" id="sum_discount" class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Tax (MYR)</label>
+                                                            <label>Tax</label>
                                                             <input type="text" id="sum_tax" class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Adjustment (MYR)</label>
+                                                            <label>Adjustment</label>
                                                             <input type="text" id="sum_adjustment"
                                                                 class="form-control" />
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Grand Total (MYR)</label>
+                                                            <label>Grand Total</label>
                                                             <input type="text" id="sum_grand_total"
                                                                 class="form-control" />
                                                         </div>
@@ -480,114 +480,67 @@
             </div>
             <!-- End Page-content -->
 
-            <?= $this->include('layouts/footer') ?>
+            <div class="modal bs-example-modal-products" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Products</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
+                        <div class="modal-body">
+                            <div class="table-rep-plugin">
+                                <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                    <table id="products_table" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                </th>
+                                                <th>Product Code</th>
+                                                <th>Product Name</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($products as $row) : ?>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault"></td>
+                                                <td><?= $row['product_code'] ?></td>
+                                                <td><?= $row['product_name'] ?></td>
+                                                <td><?= $row['description'] ?></td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light waves-effect"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light"
+                                data-bs-dismiss="modal" id="addProducts">Select</button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div>
-        <!-- end main content-->
 
+        <?= $this->include('layouts/footer') ?>
+
+    </div>
+    <!-- end main content-->
     </div>
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
 
-    <script>
-    var i = 1;
-
-    $.fn.updateSummary = function() {
-        var subTotal = 0;
-        var discount = 0;
-        var tax = 0;
-        var adjustment = 0;
-        var grandTotal = 0;
-        var j = i;
-        var val = 0;
-
-        for (; j >= 0; j--) {
-            val = $('#addr' + j).find("[name='total" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                subTotal += parseInt(val);
-            val = $('#addr' + j).find("[name='discount" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                discount += parseInt(val);
-            val = $('#addr' + j).find("[name='tax" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                tax += parseInt(val);
-        }
-        adjustment = subTotal - tax;
-        grandTotal = subTotal - discount;
-
-        $('#sum_sub_total').val(subTotal);
-        $('#sum_discount').val(discount);
-        $('#sum_tax').val(tax);
-        $('#sum_adjustment').val(adjustment);
-        $('#sum_grand_total').val(grandTotal);
-    }
-
-    $("#addrow").click(function() {
-
-        // var $tableBody = $('#invoice_table').find("tbody"),
-        // $trLast = $tableBody.find("tr:last"),
-        // $trNew = $trLast.clone();
-
-        // $trLast.after($trNew);
-        $('#addr' + i).html("<td>" + (i + 1) +
-            "</td><td><textarea cols='30' rows='1' class='form-control' name='productName" + i +
-            "'  placeholder='description'></textarea></td><td><input type='number' min='0' value='0' name='listPrice" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0'' name='quantity" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='amount" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='discount" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='tax" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
-            i +
-            "' class='invoice-table-input form-control'/></td>");
-
-        $('#invoice_table').append('<tr id="addr' + (i + 1) + '"></tr>');
-        i++;
-        $.fn.updateSummary();
-    });
-    var request_url = "<?= base_url(session('role') . '/quotes/change_currency') ?>";
-
-    $('#currency_name').on('focusin', function() {
-        $(this).data('old', $(this).val());
-    });
-    $("#currency_name").on('change', function() {
-        $.ajax({
-            url: request_url,
-            data: {
-                old: $(this).data('old'),
-                new: $(this).val()
-            },
-            dataType: 'json',
-            method: 'POST',
-            success: function(result) {
-                $('#currency_value').val(result[0]);
-                var j = i;
-                for (; j >= 0; j--) {
-                    $val = $('#addr' + j).find("[name='listPrice" + j + "']").val();
-                    $('#addr' + j).find("[name='listPrice" + j + "']").val($val * result[1]);
-                    $val = $('#addr' + j).find("[name='amount" + j + "']").val();
-                    $('#addr' + j).find("[name='amount" + j + "']").val($val * result[1]);
-                    $val = $('#addr' + j).find("[name='discount" + j + "']").val();
-                    $('#addr' + j).find("[name='discount" + j + "']").val($val * result[1]);
-                    $val = $('#addr' + j).find("[name='tax" + j + "']").val();
-                    $('#addr' + j).find("[name='tax" + j + "']").val($val * result[1]);
-                    $val = $('#addr' + j).find("[name='total" + j + "']").val();
-                    $('#addr' + j).find("[name='total" + j + "']").val($val * result[1]);
-                }
-                $.fn.updateSummary();
-            }
-        });
-        $(this).data('old', $(this).val());
-    });
-    </script>
 </body>
+
+
 
 </html>

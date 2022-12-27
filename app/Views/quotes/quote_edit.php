@@ -98,7 +98,7 @@
                                             &ensp;
                                             <a href="<?= base_url(session('role') . '/quotes') ?>"
                                                 class="btn btn-secondary mb-3"
-                                                onclick="return confirm('Cancel create quotes?');">Cancel</a>
+                                                onclick="return confirm('Cancel edit quotes?');">Cancel</a>
                                         </div>
 
                                         <div class="row mb-5">
@@ -262,7 +262,6 @@
 
                                             <div class="row mb-5">
                                                 <h6 class="mb-3">Invoiced Items</h6>
-
                                                 <div class="table-responsive">
                                                     <table class="invoice-table" id="invoice_table">
                                                         <thead>
@@ -278,8 +277,8 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php $i = 1; foreach ($invoiced_items as $row) : ?>
-                                                            <tr id=<?=$i?>>
+                                                            <?php $i = 1; foreach ($quote_items as $row) : ?>
+                                                            <tr id=<?="addr".$i?>>
                                                                 <td><?= $i ?></td>
                                                                 <td>
                                                                     <textarea cols="30" rows="1" class="form-control"
@@ -323,42 +322,42 @@
                                                                 </td>
                                                             </tr>
                                                             <?php $i ++; endforeach; ?>
-                                                            <tr id=<?=$i?>>>
-                                                                <td><?= $i ?></td>
+                                                            <tr id=<?="addr".$i?>>
+                                                                <td><?=$i?></td>
                                                                 <td>
                                                                     <textarea cols="30" rows="1" class="form-control"
-                                                                        name=<?="productName".$i?>
+                                                                        name="productName" .<?=$i?>
                                                                         placeholder="description"></textarea>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name=<?="listPrice".$i?>>
+                                                                        name="listPrice1" id="listPrice" .<?=$i?>>
+                                                                </td>
+                                                                <td>
+                                                                    <input type=" number" min="0" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="quantity" .<?=$i?>>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name=<?="quantity".$i?>>
+                                                                        name="amount" .<?=$i?>>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name=<?="amount".$i?>>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" min="0" value="0" value="0"
-                                                                        class="invoice-table-input form-control"
-                                                                        name=<?="discount".$i?>>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" min="0" value="0" value="0"
-                                                                        class="invoice-table-input form-control"
-                                                                        name=<?="tax".$i?>>
+                                                                        name="discount" .<?=$i?>>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
-                                                                        name=<?="total".$i?>>
+                                                                        name="tax" .<?=$i?>>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="total" .<?=$i?>>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -367,7 +366,8 @@
 
                                                 <div class="invoice-fields-container">
                                                     <div class="btn-area">
-                                                        <a id="addrow" class="btn btn-primary cst-btn">+ Add Row</a>
+                                                        <a onclick="showProducts()" class="btn btn-primary cst-btn">+
+                                                            Add Products</a>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <label class="col-form-label">Currency</label>
@@ -545,6 +545,55 @@
                         </div> <!-- end col -->
                     </div> <!-- end row -->
                 </div> <!-- container-fluid -->
+                <div class="modal bs-example-modal-products" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Products</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="products_table" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="flexCheckDefault">
+                                                    </th>
+                                                    <th>Product Code</th>
+                                                    <th>Product Name</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($products as $row) : ?>
+                                                <tr>
+                                                    <td><input class="form-check-input" type="checkbox" value=""
+                                                            id="flexCheckDefault"></td>
+                                                    <td><?= $row['product_code'] ?></td>
+                                                    <td><?= $row['product_name'] ?></td>
+                                                    <td><?= $row['description'] ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light waves-effect"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    data-bs-dismiss="modal" id="addProducts">Select</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
 
             </div>
             <!-- End Page-content -->
@@ -558,106 +607,7 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
-    <script>
-    var i = "<?=$i?>";
 
-    $.fn.updateSummary = function() {
-        var subTotal = 0;
-        var discount = 0;
-        var tax = 0;
-        var adjustment = 0;
-        var grandTotal = 0;
-        var j = i;
-        var val = 0;
-
-        for (; j >= 0; j--) {
-            val = $('#' + j).find("[name='total" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                subTotal += parseInt(val);
-            val = $('#' + j).find("[name='discount" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                discount += parseInt(val);
-            val = $('#' + j).find("[name='tax" + j + "']").val();
-            val = parseInt(val);
-            if (val > 0)
-                tax += parseInt(val);
-        }
-        adjustment = subTotal - tax;
-        grandTotal = subTotal - discount;
-
-        $('#sum_sub_total').val(subTotal);
-        $('#sum_discount').val(discount);
-        $('#sum_tax').val(tax);
-        $('#sum_adjustment').val(adjustment);
-        $('#sum_grand_total').val(grandTotal);
-    }
-    $.fn.updateSummary();
-    $("#addrow").click(function() {
-        i = $('#invoice_table tr:last').attr('id');
-        i = parseInt(i);
-        i = i + 1;
-        i = '' + i;
-        $('#invoice_table').append('<tr id="' + (i) + '"></tr>');
-
-        $('#' + i).html("<td>" + (i) +
-            "</td><td><textarea cols='30' rows='1' class='form-control' name='productName" + i +
-            "'  placeholder='description'></textarea></td><td><input type='number' min='0' value='0' name='listPrice" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='quantity" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='amount" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='discount" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0'' name='tax" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
-            i +
-            "' class='invoice-table-input form-control'/></td>");
-        i++;
-        $.fn.updateSummary();
-    });
-
-
-
-    var request_url = "<?= base_url(session('role') . '/quotes/change_currency') ?>";
-
-    $('#currency_name').on('focusin', function() {
-        $(this).data('old', $(this).val());
-    });
-    $("#currency_name").on('change', function() {
-        $.ajax({
-            url: request_url,
-            data: {
-                old: $(this).data('old'),
-                new: $(this).val()
-            },
-            dataType: 'json',
-            method: 'POST',
-            success: function(result) {
-                $('#currency_value').val(result[0]);
-                var j = i;
-                for (; j >= 0; j--) {
-                    $val = $('#' + j).find("[name='listPrice" + j + "']").val();
-                    $('#' + j).find("[name='listPrice" + j + "']").val($val * result[1]);
-                    $val = $('#' + j).find("[name='amount" + j + "']").val();
-                    $('#' + j).find("[name='amount" + j + "']").val($val * result[1]);
-                    $val = $('#' + j).find("[name='discount" + j + "']").val();
-                    $('#' + j).find("[name='discount" + j + "']").val($val * result[1]);
-                    $val = $('#' + j).find("[name='tax" + j + "']").val();
-                    $('#' + j).find("[name='tax" + j + "']").val($val * result[1]);
-                    $val = $('#' + j).find("[name='total" + j + "']").val();
-                    $('#' + j).find("[name='total" + j + "']").val($val * result[1]);
-                }
-                $.fn.updateSummary();
-            }
-        });
-        $(this).data('old', $(this).val());
-
-    });
-    </script>
 </body>
 
 </html>

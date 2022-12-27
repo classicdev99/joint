@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Invoices extends Model
+class InvoiceItem extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'invoices';
+   protected $DBGroup          = 'default';
+    protected $table            = 'invoice_items';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -43,12 +43,11 @@ class Invoices extends Model
     public function index($postData)
     {
         $query = $this->db->table($this->table)->insert($postData);
-        $insert_id = $this->db->insertID();
-
-        return  $insert_id;
+   
+        return $query;
     }
 
-    public function getInvoices($id = false)
+    public function getInvoiceItems($id = false)
     {
         if ($id === false) {
             return $this->findAll();
@@ -57,21 +56,33 @@ class Invoices extends Model
         }
     }
 
-    public function deleteInvoice($id)
+    public function deleteInvoiceItem($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
 
-    public function editInvoice($id)
+    public function editInvoiceItems($id)
     {
         $query = $this->find($id);
         return $query;
     }
 
-    public function updateInvoice($id, $postData)
+    public function updateInvoiceItems($id, $postData)
     {
         $query = $this->db->table($this->table)->update($postData, array('id' => $id));
         return $query;
+    }
+
+    public function getItemsForInvoice($invoice_id)
+    {
+    //    return $this->findAll();
+
+        return $this->where('invoice_id',$invoice_id)->findAll();
+    }
+
+    public function deleteItemsForInvoice($invoice_id)
+    {
+        return $this->where('invoice_id',$invoice_id)->delete();
     }
 }

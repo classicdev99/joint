@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\Product;
+use App\Models\QuoteItem;
 use App\Models\Quotes;
-use App\Models\InvoicedItem;
+use App\Models\InvoiceItem;
 use App\Models\Contact;
 
 use App\Models\Quoteinformation;
@@ -38,6 +40,11 @@ class QuoteController extends BaseController
         $data['accounts'] = $contact->getAllAccounts();
         $Masterpaymentterm=new Masterpaymentterm();
         $data['paymentterms'] = $Masterpaymentterm->findAll();
+
+        $model = new Product();
+
+        $data['products'] = $model->getProducts();
+        
         return view('quotes/quote_add', $data);
     }
 
@@ -46,7 +53,7 @@ class QuoteController extends BaseController
     //    var_dump($_POST);
     //    die;
         $model = new Quotes();
-        $invoicedItem = new InvoicedItem();
+        $quoteItem = new QuoteItem();
         $quote = [
             'quote_name'      => $this->request->getPost('quote_name'),
             'subject'       => $this->request->getPost('subject'),
@@ -61,7 +68,7 @@ class QuoteController extends BaseController
 
         $quote_id = $model->index($quote);
 
-        $i = 0;
+        $i = 1;
         do{
             if($this->request->getPost('productName' . $i) == null)
                 break;
@@ -76,7 +83,7 @@ class QuoteController extends BaseController
                     'quote_id'      => $quote_id,
                 ];
             $i ++;
-            $invoicedItem->index($item);
+            $quoteItem->index($item);
         }while(true);
       
 
@@ -94,12 +101,12 @@ class QuoteController extends BaseController
     public function Quote_edit($id)
     {
         $model = new Quotes();
-        $invoicedItem = new InvoicedItem();
+        $quoteItem = new QuoteItem();
 
         $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title' => 'Create Quote', 'li_1' => 'Dashboard', 'li_2' => 'Quotes', 'li_3' => 'Create Quote']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Edit Quote', 'li_1' => 'Dashboard', 'li_2' => 'Quotes', 'li_3' => 'Edit Quote']);
         $data['record'] = $model->editQuotes($id);
-        $data['invoiced_items'] = $invoicedItem->getQuoteItems($id);
+        $data['quote_items'] = $quoteItem->getItemsForQuote($id);
 
         $contact = new Contact();
         $data['contacts'] = $contact->getContacts();
@@ -107,13 +114,17 @@ class QuoteController extends BaseController
         $Masterpaymentterm=new Masterpaymentterm();
         $data['paymentterms'] = $Masterpaymentterm->findAll();
 
+        $model = new Product();
+
+        $data['products'] = $model->getProducts();
+
         return view('quotes/quote_edit', $data);
     }
 
     public function update_Quote($id)
     {
         $model = new Quotes();
-        $invoicedItem = new InvoicedItem();
+        $quoteItem = new QuoteItem();
 
         $quote = [
             'quote_name'      => $this->request->getPost('quote_name'),
@@ -129,7 +140,7 @@ class QuoteController extends BaseController
 
 
         $model->upadteQuotes($id, $quote);
-        $invoicedItem->deleteQuoteItems($id);
+        $quoteItem->deleteItemsforQuote($id);
         $i = 1;
         do{
             if($this->request->getPost('productName' . $i) == null)
@@ -145,7 +156,7 @@ class QuoteController extends BaseController
                     'quote_id'      => $id,
                 ];
             $i ++;
-            $invoicedItem->index($item);
+            $quoteItem->index($item);
         }while(true);
         
         return redirect()->to('/staff/quotes');

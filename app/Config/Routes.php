@@ -29,6 +29,9 @@ $routes->group('staff', static function ($routes) {
     $routes->post('postLogin', 'AuthController::postLogin');
     $routes->get('logout', 'AuthController::logout');
     $routes->get('dashboard', 'Home::dashboard', ['filter' => 'authGuard']);
+    $routes->get('pdf', 'PdfController::index', ['filter' => 'authGuard']);
+    $routes->get('quotepdf/(:num)', 'PdfController::makeQuotePdf/$1', ['filter' => 'authGuard']);
+    $routes->get('invoicepdf/(:num)', 'PdfController::makeInvoicePdf/$1', ['filter' => 'authGuard']);
 
     $routes->group('account', static function ($routes) {
         $routes->get('/', 'AccountController::index', ['filter' => 'authGuard']);

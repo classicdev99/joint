@@ -7,65 +7,65 @@
     <!-- CSS only -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
     <style>
-        .myTable input {
-            width: 100px;
-        }
+    .myTable input {
+        width: 100px;
+    }
 
-        .invoice-table th {
-            text-align: center;
-        }
+    .invoice-table th {
+        text-align: center;
+    }
 
-        .invoice-fields-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
+    .invoice-fields-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
 
-        .form-control:disabled {
-            background: #f6f6f6 !important;
-        }
+    .form-control:disabled {
+        background: #f6f6f6 !important;
+    }
 
+    .invoice-fields .form-group label {
+        display: inline-block;
+        width: 240px;
+    }
+
+    .invoice-fields .form-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0px;
+    }
+
+    a.btn.cst-btn.btn-primary {
+        background: #9cd6ff8f;
+        color: #0d6efd;
+        line-height: 23px;
+    }
+
+    @media (max-width: 420px) {
         .invoice-fields .form-group label {
-            display: inline-block;
-            width: 240px;
+            display: block;
+            width: 100%;
         }
 
         .invoice-fields .form-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 15px 0px;
+            display: block;
         }
 
-        a.btn.cst-btn.btn-primary {
-            background: #9cd6ff8f;
-            color: #0d6efd;
-            line-height: 23px;
+        .invoice-fields {
+            width: 100%;
         }
 
-        @media (max-width: 420px) {
-            .invoice-fields .form-group label {
-                display: block;
-                width: 100%;
-            }
+    }
 
-            .invoice-fields .form-group {
-                display: block;
-            }
-
-            .invoice-fields {
-                width: 100%;
-            }
-
+    @media (max-width: 991px) {
+        .table-responsive .invoice-table th {
+            font-size: 12px;
         }
-
-        @media (max-width: 991px) {
-            .table-responsive .invoice-table th {
-                font-size: 12px;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -95,7 +95,9 @@
                                         <div class="d-flex flex-row-reverse">
                                             <input type="submit" value="Save" class="btn btn-primary mb-3">
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/invoice') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel create invoice?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/invoice') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel create invoice?');">Cancel</a>
                                         </div>
 
                                         <div class="row mb-5">
@@ -200,7 +202,8 @@
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc['accountname'] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc['accountname'] ?>">
+                                                            <?= $acc['accountname'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -229,7 +232,8 @@
                                                         <?php
                                                         foreach ($contacts as $contact) {
                                                         ?>
-                                                            <option value="<?= $contact['lastName'] ?>"><?= $contact['lastName'] ?></option>
+                                                        <option value="<?= $contact['lastName'] ?>">
+                                                            <?= $contact['lastName'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -278,42 +282,56 @@
                                             <h6 class="mb-3">Invoiced Items</h6>
 
                                             <div class="table-responsive">
-                                                <table class="invoice-table">
+                                                <table class="invoice-table" id="invoice_table">
                                                     <thead>
                                                         <tr>
                                                             <th>S.No</th>
                                                             <th>Product Name</th>
-                                                            <th>List Price (MYR)</th>
+                                                            <th>List Price</th>
                                                             <th>Quantity</th>
-                                                            <th>Amount (MYR)</th>
-                                                            <th>Discount (MYR)</th>
-                                                            <th>Tax (MYR)</th>
-                                                            <th>Total (MYR)</th>
+                                                            <th>Amount</th>
+                                                            <th>Discount</th>
+                                                            <th>Tax</th>
+                                                            <th>Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        <tr id="addr1">
                                                             <td>1</td>
                                                             <td>
-                                                                <textarea name="description" id="description" cols="30" rows="1" class="form-control" name="productName" placeholder="description"></textarea>
+                                                                <textarea cols="30" rows="1" class="form-control"
+                                                                    name="productName1"
+                                                                    placeholder="description"></textarea>
                                                             </td>
                                                             <td>
-                                                                <input type="text" class="invoice-table-input form-control" name="listPrice">
+                                                                <input type="number" min="0" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="listPrice1" id="listPrice1">
                                                             </td>
                                                             <td>
-                                                                <input type="text" class="invoice-table-input form-control" name="quantity">
+                                                                <input type=" number" min="0" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="quantity1">
                                                             </td>
                                                             <td>
-                                                                <input type="text" class="invoice-table-input form-control" name="amount">
+                                                                <input type="number" min="0" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="amount1">
                                                             </td>
                                                             <td>
-                                                                <input type="text" value="0" class="invoice-table-input form-control" name="discount">
+                                                                <input type="number" min="0" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="discount1">
                                                             </td>
                                                             <td>
-                                                                <input type="text" value="0" class="invoice-table-input form-control" name="tax">
+                                                                <input type="number" min="0" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="tax1">
                                                             </td>
                                                             <td>
-                                                                <input type="text" class="invoice-table-input form-control" name="total">
+                                                                <input type="number" value="0"
+                                                                    class="invoice-table-input form-control"
+                                                                    name="total1">
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -322,32 +340,33 @@
 
                                             <div class="invoice-fields-container">
                                                 <div class="btn-area">
-                                                    <a href="#" class="btn btn-primary cst-btn">+ Add Row</a>
+                                                    <a onclick="showProducts()" class="btn btn-primary cst-btn">+ Add
+                                                        Products</a>
                                                 </div>
                                                 <div class="invoice-fields">
                                                     <div class="form-group">
-                                                        <label>Sub Total (MYR)</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Sub Total</label>
+                                                        <input type="text" id="sum_sub_total" class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>Discount (MYR)</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Discount</label>
+                                                        <input type="text" id="sum_discount" class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>Tax (MYR)</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Tax</label>
+                                                        <input type="text" id="sum_tax" class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>Adjustment (MYR)</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Adjustment</label>
+                                                        <input type="text" id="sum_adjustment" class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label>Grand Total (MYR)</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Grand Total</label>
+                                                        <input type="text" id="sum_grand_total" class="form-control" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -475,6 +494,55 @@
                         </div> <!-- end col -->
                     </div> <!-- end row -->
                 </div> <!-- container-fluid -->
+                <div class="modal bs-example-modal-products" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Products</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="products_table" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="flexCheckDefault">
+                                                    </th>
+                                                    <th>Product Code</th>
+                                                    <th>Product Name</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($products as $row) : ?>
+                                                <tr>
+                                                    <td><input class="form-check-input" type="checkbox" value=""
+                                                            id="flexCheckDefault"></td>
+                                                    <td><?= $row['product_code'] ?></td>
+                                                    <td><?= $row['product_name'] ?></td>
+                                                    <td><?= $row['description'] ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light waves-effect"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    data-bs-dismiss="modal" id="addProducts">Select</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
 
             </div>
             <!-- End Page-content -->
