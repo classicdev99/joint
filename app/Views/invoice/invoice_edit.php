@@ -583,7 +583,7 @@
             <!-- End Page-content -->
 
             <?= $this->include('layouts/footer') ?>
-            <?= $this->include('layouts/dialog') ?>
+            <?= $this->include('dialog/products') ?>
         </div>
         <!-- end main content-->
 

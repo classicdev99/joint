@@ -92,7 +92,6 @@
             <!-- End Page-content -->
 
             <?= $this->include('layouts/footer') ?>
-
         </div>
         <!-- end main content-->
 
