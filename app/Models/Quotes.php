@@ -54,7 +54,7 @@ class Quotes extends Model
         if ($id === false) {
             return $this->findAll();
         } else {
-            return $this->getWhere(['id' => $id]);
+            return $this->where("id", $id)->first();
         }
     }
 
@@ -73,6 +73,13 @@ class Quotes extends Model
     public function upadteQuotes($id, $postData)
     {
         $query = $this->db->table($this->table)->update($postData, array('id' => $id));
+        return $query;
+    }
+
+    public function updateState($id, $state)
+    {
+        $array = array('state' => $state);
+        $query = $this->db->table($this->table)->update($array, array('id' => $id));
         return $query;
     }
 }

@@ -57,15 +57,16 @@
 
                                                     <?php foreach ($quotes as $row) : ?>
                                                     <tr>
+                                                        <td hidden><?= $row['id']?></td>
                                                         <td><input class="form-check-input" type="checkbox" value=""
                                                                 id="flexCheckDefault"></td>
-                                                        <td>???</td>
-                                                        <td>???</td>
-                                                        <td><?= $row['subject'] ?></td>
-                                                        <td>???</td>
-                                                        <td><?= $row['account_name'] ?></td>
-                                                        <td>???</td>
-                                                        <td>???</td>
+                                                        <td class='quotation_clickable'>???</td>
+                                                        <td class='quotation_clickable'>???</td>
+                                                        <td class='quotation_clickable'><?= $row['subject'] ?></td>
+                                                        <td class='quotation_clickable'>???</td>
+                                                        <td class='quotation_clickable'><?= $row['account_name'] ?></td>
+                                                        <td class='quotation_clickable'>???</td>
+                                                        <td class='quotation_clickable'>???</td>
                                                         <td>
                                                             <a href="<?= base_url(session('role') . '/quotes/edit/' . $row['id']) ?>"
                                                                 class="btn btn-primary btn-sm" title="Update quotes">
@@ -97,7 +98,7 @@
             <!-- End Page-content -->
 
             <?= $this->include('layouts/footer') ?>
-
+            <?= $this->include('dialog/quotation') ?>
         </div>
         <!-- end main content-->
 

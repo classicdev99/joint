@@ -96,6 +96,7 @@ class InvoiceController extends BaseController
                     'tax'     => $this->request->getPost('tax' . $i),
                     'total'          => $this->request->getPost('total' . $i),
                     'invoice_id'      => $invoice_id,
+                    'product_id'      => $this->request->getPost('productId' . $i),
                 ];
             $i ++;
             $invoiceItem->index($item);
@@ -186,6 +187,7 @@ class InvoiceController extends BaseController
                     'tax'     => $this->request->getPost('tax' . $i),
                     'total'          => $this->request->getPost('total' . $i),
                     'invoice_id'      => $id,
+                    'product_id'      => $this->request->getPost('productId' . $i),
                 ];
             $i ++;
             $invoiceItem->index($item);

@@ -81,6 +81,7 @@ class QuoteController extends BaseController
                     'tax'     => $this->request->getPost('tax' . $i),
                     'total'          => $this->request->getPost('total' . $i),
                     'quote_id'      => $quote_id,
+                    'product_id'    => $this->request->getPost('productId' . $i),
                 ];
             $i ++;
             $quoteItem->index($item);
@@ -154,6 +155,7 @@ class QuoteController extends BaseController
                     'tax'     => $this->request->getPost('tax' . $i),
                     'total'          => $this->request->getPost('total' . $i),
                     'quote_id'      => $id,
+                    'product_id'    => $this->request->getPost('productId' . $i),
                 ];
             $i ++;
             $quoteItem->index($item);
@@ -176,5 +178,25 @@ class QuoteController extends BaseController
         // if ($currency == 1)
         //     echo json_encode($usd / $usd);
             
+    }
+
+    public function get_state($id){
+        $model = new Quotes();
+        //$id = $this->request->getGet('id');
+        $state = $model->getQuotes($id)['state'];
+        // var_dump($state);
+        // die();
+        return json_encode($state);
+    }
+
+    public function change_state(){
+        $model = new Quotes();
+        $id = $this->request->getPost('id');
+        $state = $this->request->getPost('state');
+        // var_dump($state);
+        // die();
+        $result = $model->updateState($id, $state);
+        if(!$result) return json_encode(false);
+        return json_encode($state);
     }
 }

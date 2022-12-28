@@ -95,8 +95,6 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
@@ -154,10 +152,12 @@ $("#addProducts").click(function() {
 
     $table = $('#products_table');
     var message = "";
-    var productNames = []
+    var productNames = [];
+    var productIds = [];
     $("#products_table input[type=checkbox]:checked").each(function() {
         var row = $(this).closest("tr")[0];
         productNames.push(row.cells[2].innerHTML);
+        productIds.push(row.cells[4].innerHTML);
     });
     if (productNames.length == 0) {
         alert("Choose one product at least.");
@@ -187,14 +187,18 @@ $("#addProducts").click(function() {
             i +
             "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
             i +
-            "' class='invoice-table-input form-control'/></td>");
+            "' class='invoice-table-input form-control'/></td><td> <a href = '" +
+            "<?= base_url(session('role') . '/product/edit') ?>" + "/" + productIds[index] +
+            "' class = 'btn btn-primary btn-sm form-control'title = 'Update quotes' ><i class = 'fas fa-edit'></i></a></td><td><input type='number' min='0' value='" +
+            productIds[index] +
+            "' name='productId" + i +
+            "' class='invoice-table-input form-control' hidden/></td>"
+        );
         i++;
     }
 
     $.fn.updateSummary();
 });
-
-
 
 $('#currency_name').on('focusin', function() {
     $(this).data('old', $(this).val());
@@ -266,5 +270,228 @@ $.fn.updateSummary = function() {
     $('#sum_tax').val(tax);
     $('#sum_adjustment').val(adjustment);
     $('#sum_grand_total').val(grandTotal);
+}
+
+function quotationStateChange() {
+    $('.bs-quotation-state-waiting-quote').modal('show');
+}
+var quoteId = -1;
+$(".quotation_clickable").click(function() {
+    quoteId = $(this).closest("tr")[0].cells[0].innerHTML;
+    var url = "<?= base_url(session('role') . '/quotes/get_state') ?>" + "/" + quoteId;
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        method: 'GET',
+        success: function(result) {
+            //$('#currency_value').val(result[0]);
+            $.fn.proceedQuote(result);
+        }
+    });
+});
+
+$.fn.proceedQuote = function(state) {
+    if (!state) {
+        $('.bs-quotation-state-waiting-quote').modal('show');
+    }
+    if (state == "advice") {
+        $('.bs-quotation-state-advice').modal('show');
+    }
+    if (state == "lost") {
+        $('.bs-quotation-state-lost').modal('show');
+    }
+
+    if (state == "proposal") {
+        $('.bs-quotation-state-proposal').modal('show');
+    }
+    if (state == "follow") {
+        $('.bs-quotation-state-follow').modal('show');
+    }
+    if (state == "ordering") {
+        $('.bs-quotation-state-ordering').modal('show');
+    }
+    if (state == "pending") {
+        $('.bs-quotation-state-pending').modal('show');
+    }
+    if (state == "spare") {
+        $('.bs-quotation-state-spare').modal('show');
+    }
+
+    if (state == "loading") {
+        $('.bs-quotation-state-loading').modal('show');
+    }
+
+    if (state == "closed") {
+        $('.bs-quotation-state-closed').modal('show');
+    }
+}
+
+function toAdvice() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "advice",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toLost() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "lost",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toManual() {
+    if (quoteId == -1) return;
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "manual",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toProposal() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "proposal",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toFollow() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "follow",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toOrdering() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "ordering",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toPending() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "pending",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toSpare() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "spare",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toLoading() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "loading",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
+}
+
+function toClosed() {
+    if (quoteId == -1) return;
+    var url = "<?= base_url(session('role') . '/quotes/change_state') ?>";
+    $.ajax({
+        url: url,
+        data: {
+            id: quoteId,
+            state: "closed",
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function(result) {
+            $.fn.proceedQuote(result);
+        }
+    });
 }
 </script>
