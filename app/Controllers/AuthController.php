@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;  
+use App\Models\User;
 use CodeIgniter\API\ResponseTrait;
 use Exception;
 
@@ -16,6 +17,56 @@ class AuthController extends BaseController {
         }
     }
     
+    public function register(){
+        $role = $this->request->uri->getSegment('1');
+        
+        switch($role) {
+            case "staff":
+                $data['title_meta'] = view('layouts/title-meta', ['title' => 'Staff Register']);
+                $data['page_title'] = view('layouts/page-title', ['li_1' => 'Staff Register']);
+                break;
+        }
+        $data['role'] = $role;
+        return view('register',$data);
+    }
+
+    public function postRegister() {
+	    $role = $this->request->uri->getSegment('1');
+	    $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+
+        switch($role) {
+            case "staff":
+                $data['title_meta'] = view('layouts/title-meta', ['title' => 'Staff Register']);
+                $data['page_title'] = view('layouts/page-title', ['li_1' => 'Staff Register']);
+                break;
+        }
+        $data['role'] = $role;
+
+		helper(['form']);
+
+        $rules = [
+            'username' 		=> 'required|min_length[3]|max_length[20]',
+			'email' 		=> 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
+			'password' 		=> 'required|min_length[6]|max_length[200]',
+		];
+
+        if($this->validate($rules)){
+			$model = new User();
+			$user = [
+				'username' 	=> $this->request->getVar('username'),
+				'email' 	=> $this->request->getVar('email'),
+				'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+			];
+			$model->index($user);
+            $this->session->setFlashdata('registered', 'Successfully registered.');
+			return redirect()->to('' . $role . '/login');
+		}else{
+			$data['validation'] = $this->validator;
+			return view('register', $data);
+		}
+	}
+
     public function login() {
         $role = $this->request->uri->getSegment('1');
         
@@ -31,20 +82,42 @@ class AuthController extends BaseController {
     }
 	
 	public function postLogin() {
+        $model = new User();
 	    $role = $this->request->uri->getSegment('1');
 	    $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         
-        $session_data = [
-            'user_id' => 1,
-            'name' => "Lim Mei Mei",
-            'email' => $email,
-            'isLoggedIn' => TRUE,
-            'role' => $role,
-        ];
-        $this->session->set($session_data);
-        
-        return redirect()->to($role.'/dashboard');
+        // $session_data = [
+        //     'user_id' => 1,
+        //     'name' => "Lim Mei Mei",
+        //     'email' => $email,
+        //     'isLoggedIn' => TRUE,
+        //     'role' => $role,
+        // ];
+        // $this->session->set($session_data);
+
+        $user = $model->getUsers($email);
+        if($user){
+            $pass = $user['password'];
+            $verify_pass = password_verify($password, $pass);
+            if($verify_pass){
+                $session_data = [
+                    'id'       => $user['id'],
+                    'username'     => $user['username'],
+                    'email'    => $user['email'],
+                    'isLoggedIn'     => TRUE,
+                    'role' => $role,
+                ];
+                $this->session->set($session_data);
+                return redirect()->to('' . session('role') .'/dashboard');
+            }else{
+                $this->session->setFlashdata('login_error', 'Wrong Password');
+                return redirect()->to($role.'/login');
+            }
+        }else{
+            $this->session->setFlashdata('login_error', 'Email is not registered');
+            return redirect()->to($role.'/login');
+        }
 	}
 	
     public function logout() {

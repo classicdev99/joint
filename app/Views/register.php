@@ -39,18 +39,28 @@
                                                         src="<?php echo base_url()?>/assets/images/logo.png" height="40"
                                                         alt="logo"></a>
                                             </div>
-                                            <h4 class="font-size-18 mt-4">Welcome Back to <?= ucfirst($role) ?> Login !
+                                            <h4 class="font-size-18 mt-4">Welcome to <?= ucfirst($role) ?> Registser !
                                             </h4>
-                                            <p class="text-muted">Sign in to continue as JOINT <?= ucfirst($role) ?>.
+                                            <p class="text-muted">Register to continue as JOINT <?= ucfirst($role) ?>.
                                             </p>
                                         </div>
 
                                         <div class="p-2 mt-5">
 
                                             <?= $this->include('layouts/alert') ?>
-
+                                            <?php if(isset($validation)):?>
+                                            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+                                            <?php endif;?>
                                             <form class="" method="post"
-                                                action="<?php echo base_url('/'.$role.'/postLogin') ?>" novalidate>
+                                                action="<?php echo base_url('/'.$role.'/postRegister') ?>">
+
+                                                <div class="mb-3 auth-form-group-custom mb-4">
+                                                    <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                    <label for="username">Username</label>
+                                                    <input type="text" class="form-control" id="username"
+                                                        name="username" placeholder="Enter Username" required>
+                                                </div>
+
                                                 <div class="mb-3 auth-form-group-custom mb-4">
                                                     <i class="ri-user-2-line auti-custom-input-icon"></i>
                                                     <label for="email">Email</label>
@@ -65,33 +75,18 @@
                                                         name="password" placeholder="Enter password" required>
                                                 </div>
 
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        id="customControlInline">
-                                                    <label class="form-check-label" for="customControlInline">Remember
-                                                        me</label>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="col-3 p-3">
+                                                        <button class="btn btn-primary w-md waves-effect waves-light"
+                                                            type="submit">Register</button>
+                                                    </div>
                                                 </div>
-
-                                                <div class="mt-4 text-center">
-                                                    <button class="btn btn-primary w-md waves-effect waves-light"
-                                                        type="submit">Log In</button>
-                                                </div>
-
                                                 <!-- <div class="mt-4 text-center">
                                                         <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
                                                     </div> -->
                                             </form>
                                         </div>
 
-                                        <div class="mt-5 text-center">
-                                            <p>Don't have an account ? <a
-                                                    href="<?php echo base_url('/'.$role.'/register') ?>"
-                                                    class="fw-medium text-primary"> Register </a> </p>
-                                            <!-- <p>© <script>
-                                                document.write(new Date().getFullYear())
-                                                </script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                                by Themesdesign</p> -->
-                                        </div>
                                     </div>
                                 </div>
                             </div>

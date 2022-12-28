@@ -27,6 +27,8 @@ $routes->group('staff', static function ($routes) {
     $routes->get('/', 'AuthController::login');
     $routes->get('login', 'AuthController::login');
     $routes->post('postLogin', 'AuthController::postLogin');
+    $routes->get('register', 'AuthController::register');
+    $routes->post('postRegister', 'AuthController::postRegister');
     $routes->get('logout', 'AuthController::logout');
     $routes->get('dashboard', 'Home::dashboard', ['filter' => 'authGuard']);
     $routes->get('pdf', 'PdfController::index', ['filter' => 'authGuard']);

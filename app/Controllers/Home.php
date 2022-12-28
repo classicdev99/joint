@@ -18,10 +18,6 @@ class Home extends BaseController
         $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
         $data['page_title'] = view('layouts/page-title', ['title'=>'Dashboard', 'li_1'=>'Dashboard']);
         $model = new Event();
-        // $data['events'] = $model->getEvents();
-        // var_dump($data['events']);
-        // die();
-
 
         $db = \Config\Database::connect();
         $builder = $db->table('events');   
