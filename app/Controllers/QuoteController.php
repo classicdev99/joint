@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Product;
 use App\Models\QuoteItem;
 use App\Models\Quotes;
@@ -54,6 +55,7 @@ class QuoteController extends BaseController
     //    die;
         $model = new Quotes();
         $quoteItem = new QuoteItem();
+        $activityLog = new ActivityLog();
         $quote = [
             'quote_name'      => $this->request->getPost('quote_name'),
             'subject'       => $this->request->getPost('subject'),
@@ -67,6 +69,12 @@ class QuoteController extends BaseController
         ];
 
         $quote_id = $model->index($quote);
+
+        $log = [
+            'activity' => "quote",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
 
         $i = 1;
         do{
@@ -96,6 +104,14 @@ class QuoteController extends BaseController
     {
         $model = new Quotes();
         $model->deleteQuotes($id);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "quote",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+
         return redirect()->to('/staff/quotes');
     }
 
@@ -126,7 +142,7 @@ class QuoteController extends BaseController
     {
         $model = new Quotes();
         $quoteItem = new QuoteItem();
-
+        $activityLog = new ActivityLog();
         $quote = [
             'quote_name'      => $this->request->getPost('quote_name'),
             'subject'       => $this->request->getPost('subject'),
@@ -141,6 +157,14 @@ class QuoteController extends BaseController
 
 
         $model->upadteQuotes($id, $quote);
+
+        $log = [
+            'activity' => "quote",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+
+        
         $quoteItem->deleteItemsforQuote($id);
         $i = 1;
         do{

@@ -50,7 +50,7 @@
                         <span>Tasks</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="<?= base_url(session('role') . '/leave') ?>" class=" waves-effect">
                         <i class="ri-table-2"></i>
@@ -116,6 +116,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= base_url(session('role') . '/activitylog') ?>" class=" waves-effect">
+                        <i class="ri-layout-3-line"></i>
+                        <span>Activity Logs</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-database-2-line"></i>
                         <span>Master</span>
@@ -126,8 +132,10 @@
                         <li><a href="<?= base_url(session('role') . '/master/leadstatus') ?>">Lead Status</a></li>
                         <li><a href="<?= base_url(session('role') . '/master/industry') ?>">Industry</a></li>
                         <li><a href="<?= base_url(session('role') . '/master/customertype') ?>">Customer Type</a></li>
-                        <li><a href="<?= base_url(session('role') . '/master/actionrequired') ?>">Action Required</a></li>
-                        <li><a href="<?= base_url(session('role') . '/master/productcategory') ?>">Product Categories</a></li>
+                        <li><a href="<?= base_url(session('role') . '/master/actionrequired') ?>">Action Required</a>
+                        </li>
+                        <li><a href="<?= base_url(session('role') . '/master/productcategory') ?>">Product
+                                Categories</a></li>
                         <li><a href="<?= base_url(session('role') . '/master/brand') ?>">Brands</a></li>
                         <li><a href="<?= base_url(session('role') . '/master/rating') ?>">Rating</a></li>
                         <li><a href="<?= base_url(session('role') . '/master/paymentterm') ?>">Payment Term</a></li>

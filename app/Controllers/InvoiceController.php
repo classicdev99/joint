@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\InvoiceItem;
 use App\Models\Invoices;
 use App\Models\Contact;
@@ -46,6 +47,7 @@ class InvoiceController extends BaseController
     {
         $model = new Invoices();
         $invoiceItem = new InvoiceItem();
+        $activityLog = new ActivityLog();
         $invoice = [
             'invoiceOwner'      => $this->request->getPost('invoiceOwner'),
             'productOrder'       => $this->request->getPost('productOrder'),
@@ -82,7 +84,11 @@ class InvoiceController extends BaseController
             // 'total'      => $this->request->getPost('total'),
         ];
         $invoice_id = $model->index($invoice);
-
+        $log = [
+            'activity' => "invoice",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
         $i = 1;
         do{
             if($this->request->getPost('productName' . $i) == null)
@@ -108,7 +114,12 @@ class InvoiceController extends BaseController
     {
         $model = new Invoices();
         $model->deleteInvoice($id);
-
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "invoice",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/invoice');
     }
 
@@ -136,6 +147,7 @@ class InvoiceController extends BaseController
     {
         $model = new Invoices();
         $invoiceItem = new InvoiceItem();
+        $activityLog = new ActivityLog();
         $invoice = [
             'invoiceOwner'      => $this->request->getPost('invoiceOwner'),
             'productOrder'       => $this->request->getPost('productOrder'),
@@ -172,6 +184,11 @@ class InvoiceController extends BaseController
             // 'total'      => $this->request->getPost('total'),
         ];
         $model->updateInvoice($id, $invoice);
+        $log = [
+            'activity' => "invoice",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
         $invoiceItem->deleteItemsForInvoice($id);
 
         $i = 1;

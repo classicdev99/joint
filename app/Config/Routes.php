@@ -171,6 +171,11 @@ $routes->group('staff', static function ($routes) {
         $routes->post('edit_submit/(:num)', 'InvoiceController::update_Invoice/$1', ['filter' => 'authGuard']);
     });
 
+    $routes->group('activitylog', static function ($routes) {
+        $routes->get('/', 'ActivityLogController::index', ['filter' => 'authGuard']);
+    //    $routes->get('add_', 'ActivityLogController::activitylog_add', ['filter' => 'authGuard']);
+    });
+
     $routes->group('master', static function ($routes) {
         $routes->get('prefix', 'MasterController::prefix', ['filter' => 'authGuard']);
         $routes->get('leadsource', 'MasterController::leadsource', ['filter' => 'authGuard']);
