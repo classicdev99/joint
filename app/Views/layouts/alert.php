@@ -23,4 +23,8 @@
     if(!empty(session()->getFlashdata('login_error'))) {
         echo "<div class='alert alert-danger'>".session()->getFlashdata('login_error')."</div>";
     }
+    
+    if(!empty(session()->getFlashdata('not_admin'))) {
+        echo "<div class='alert alert-danger'>".session()->getFlashdata('not_admin')."</div>";
+    }
 ?>

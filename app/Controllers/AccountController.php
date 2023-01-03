@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Account;
+use App\Models\ActivityLog;
 use App\Models\Contact;
 use App\Models\Mastercustomertype;
 use App\Models\Masteractionrequired;
@@ -110,6 +111,13 @@ class accountController extends BaseController
 
         $this->accountModel->save($data);
 
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "account",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
+        
         return redirect('' . session('role') . '/account')->with('status', 'Account inserted Successfully');
     }
 
@@ -192,6 +200,13 @@ class accountController extends BaseController
 
         $this->accountModel->update($id, $data);
 
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "invoice",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+
         return redirect('' . session('role') . '/account')->with('status', 'Account updated Successfully');
     }
 
@@ -211,6 +226,13 @@ class accountController extends BaseController
         $lora = new Account();
         $lora->delete($id);
 
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "invoice",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+        
         return redirect('' . session('role') . '/account')->with('status', 'Account Successfully Deleted');
     }
 }

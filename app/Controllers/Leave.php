@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
  
+use App\Models\ActivityLog;
 use CodeIgniter\Controller;
 use App\Models\LeaveModel;
 class Leave extends BaseController
@@ -29,10 +30,24 @@ class Leave extends BaseController
             $leaveModel->insert($data);
             $result['error']=false;
             $result['message']='Added Successfully';
+
+            $activityLog = new ActivityLog();
+            $log = [
+                'activity' => "leave application",
+                'action' => "create",
+            ];
+            $activityLog->index($log);
         }else{
             $leaveModel->update($id, $data);
             $result['error']=false;
             $result['message']='Updated Successfully';
+
+            $activityLog = new ActivityLog();
+            $log = [
+                'activity' => "leave application",
+                'action' => "update",
+            ];
+            $activityLog->index($log);
         }
         echo json_encode($result);
     }
@@ -52,6 +67,13 @@ class Leave extends BaseController
         $leaveModel->where('id', $id)->delete($id);
         $result['error']=false;
         $result['message']='Deleted Successfully';
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "leave application",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
         echo json_encode($result);
     }  
 }

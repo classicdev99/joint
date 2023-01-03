@@ -47,7 +47,7 @@ class InvoiceController extends BaseController
     {
         $model = new Invoices();
         $invoiceItem = new InvoiceItem();
-        $activityLog = new ActivityLog();
+
         $invoice = [
             'invoiceOwner'      => $this->request->getPost('invoiceOwner'),
             'productOrder'       => $this->request->getPost('productOrder'),
@@ -74,7 +74,7 @@ class InvoiceController extends BaseController
             'billingCountry'      => $this->request->getPost('billingCountry'),
             'shippingCode'      => $this->request->getPost('shippingCode'),
             'shippingCountry'      => $this->request->getPost('shippingCountry'),
-            // 'TermsAndCondition'      => $this->request->getPost('TermsAndCondition'),
+             'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
             // 'description'      => $this->request->getPost('description'),
             // 'listPrice'      => $this->request->getPost('listPrice'),
             // 'quantity'      => $this->request->getPost('quantity'),
@@ -84,11 +84,14 @@ class InvoiceController extends BaseController
             // 'total'      => $this->request->getPost('total'),
         ];
         $invoice_id = $model->index($invoice);
+
+        $activityLog = new ActivityLog();
         $log = [
             'activity' => "invoice",
             'action' => "create",
         ];
         $activityLog->index($log);
+        
         $i = 1;
         do{
             if($this->request->getPost('productName' . $i) == null)
@@ -174,7 +177,7 @@ class InvoiceController extends BaseController
             'billingCountry'      => $this->request->getPost('billingCountry'),
             'shippingCode'      => $this->request->getPost('shippingCode'),
             'shippingCountry'      => $this->request->getPost('shippingCountry'),
-            // 'TermsAndCondition'      => $this->request->getPost('TermsAndCondition'),
+             'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
             // 'description'      => $this->request->getPost('description'),
             // 'listPrice'      => $this->request->getPost('listPrice'),
             // 'quantity'      => $this->request->getPost('quantity'),

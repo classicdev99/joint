@@ -2,12 +2,83 @@
 <html lang="en">
 
 <head>
-    <!-- <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" /> -->
     <style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .header_title {
+        margin: 0;
+        padding: 0;
+        height: 100px;
+    }
+
+    .quotation_title {
+        color: skyblue;
+        border-top: 2px solid lightgray;
+        border-bottom: 2px solid lightgray;
+        font-size: 24px;
+        font-weight: bold;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .quotation_title .quotation_title_left {
+        display: inline-block;
+    }
+
+    .quotation_title .quotation_title_right {
+        display: inline-block;
+        float: right;
+    }
+
+    .bill_section {
+        margin: 10px 20px 10px 20px;
+        color: skyblue;
+        font-size: 18px;
+    }
+
+    .bill_section .bill_left {
+        display: inline-block;
+        height: 100px;
+        font-weight: bold;
+    }
+
+    .bill_section .bill_right {
+        display: inline-block;
+        height: 100px;
+        width: 50%;
+        float: right;
+    }
+
+    .bill_section .bill_right table {
+        border-collapse: collapse;
+        width: 100%;
+        text-align: left;
+    }
+
+    .bill_section .bill_right table td:first-child {
+
+        border: 3px solid #ddd;
+        padding: 8px;
+        width: 50%;
+        text-align: left;
+    }
+
+    .bill_section .bill_right table td:nth-child(2) {
+
+        border: 3px solid #ddd;
+        padding: 8px;
+        width: 50%;
+        text-align: left;
+    }
+
     #invoice_table {
+        margin-top: 150px;
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
+        font-size: 14px;
     }
 
     #invoice_table td,
@@ -29,92 +100,150 @@
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: lightslategray;
-        color: white;
+        background-color: lightgray;
+        color: black;
+    }
+
+    .lead_time_section {
+        margin: 30px;
+        border-bottom: 2px solid lightgray;
+    }
+
+    .lead_time_section p {
+        font-weight: bold;
+        margin-left: 30px;
+        font-size: 12px;
+    }
+
+    .terms_section {
+        margin: 30px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .terms_section .terms_left {
+        display: inline-block;
+    }
+
+    .terms_section .terms_right {
+        display: inline-block;
+        float: right;
+        width: 50%;
+    }
+
+    .terms_section .terms_right table {
+        width: 100%;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    .terms_section .terms_right table td {
+        width: 50%;
+    }
+
+    .terms_section .terms_right .grand_total {
+        font-size: 20px;
+        width: 100%;
+        margin-top: 30px;
+        border-top: 2px solid lightgray;
+        border-bottom: 2px solid lightgray;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .terms_section .terms_right .grand_total td {
+        width: 50%;
+    }
+
+    .terms_and_conditions {
+        margin: 30px;
+        font-weight: bold;
+        width: 60%;
+    }
+
+    .terms_and_conditions .title {
+        font-size: 16px;
+
+    }
+
+    .terms_and_conditions .content {
+        margin: 0;
+        padding: 0;
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .last_section {
+        margin: 30px;
+    }
+
+    .last_section .last_left {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: bold;
+        width: 50%;
+    }
+
+    .last_section .last_left p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .last_section .last_right {
+        display: inline-block;
+        width: 40%;
+        float: right;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .last_section .last_right p {
+        text-align: right;
     }
     </style>
 </head>
 
 <body>
-    <h1>Invoice Information</h1>
+    <h1 class="header_title"></h1>
+    <div class="quotation_title">
+        <p class="quotation_title_left">Invoice</h2>
+        <p class="quotation_title_right">Doc No:MQ-11234</h2>
+    </div>
+    <div class="bill_section">
+        <div class="bill_left">
+            <p>Bill to</h4>
+            <p>Somebody</h5>
+        </div>
+        <div class="bill_right">
+            <table>
+                <tr>
+                    <td>Attn</td>
+                    <td><?=$record['invoiceOwner']?></td>
+                </tr>
+                <tr>
+                    <td>Tel</td>
+                    <td><?=$record['productOrder']?></td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td><?=$record['subject']?></td>
+                </tr>
+                <tr>
+                    <td>Sales person</td>
+                    <td><?=$record['purchaseOrder']?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <table id="invoice_table">
-        <tr>
-            <th>Label</th>
-            <th>Information</th>
-        </tr>
-        <tr>
-            <td>Invoice Owner</td>
-            <td><?=$record['invoiceOwner']?></td>
-        </tr>
-        <tr>
-            <td>Product Order</td>
-            <td><?=$record['productOrder']?></td>
-        </tr>
-        <tr>
-            <td>Subject</td>
-            <td><?=$record['subject']?></td>
-        </tr>
-        <tr>
-            <td>Purchase Order</td>
-            <td><?=$record['purchaseOrder']?></td>
-        </tr>
-        <tr>
-            <td>Invoice Date</td>
-            <td><?=$record['invoiceDate']?></td>
-        </tr>
-        <tr>
-            <td>Excise Duty</td>
-            <td><?=$record['exciseDuty']?></td>
-        </tr>
-        <tr>
-            <td>Due Date</td>
-            <td><?=$record['dueDate']?></td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td><?=$record['status']?></td>
-        </tr>
-        <tr>
-            <td>Sales Commision</td>
-            <td><?=$record['salesCommision']?></td>
-        </tr>
-        <tr>
-            <td>Quote No</td>
-            <td><?=$record['quoteNo']?></td>
-        </tr>
-        <tr>
-            <td>Account Name</td>
-            <td><?=$accounts[0]['accountname']?></td>
-        </tr>
-        <tr>
-            <td>Contact Name</td>
-            <td><?=$contacts[0]['lastName']?></td>
-        </tr>
-        <tr>
-            <td>Payment Term</td>
-            <td><?=$record['paymentTerm']?></td>
-        </tr>
-        <tr>
-            <td>Delivery Terms</td>
-            <td><?=$record['deliveryTerms']?></td>
-        </tr>
-        <tr>
-            <td>Current PIC Name</td>
-            <td><?=$record['currentPicName']?></td>
-        </tr>
-    </table>
-    <h2>Invoiced Items</h2>
     <table id="invoice_table">
         <thead>
             <tr>
-                <th>S.No</th>
-                <th>Product Name</th>
+                <th>No</th>
+                <th style="width:60%">Product Details</th>
                 <th>List Price</th>
                 <th>Quantity</th>
-                <th>Amount</th>
-                <th>Discount</th>
-                <th>Tax</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -132,15 +261,6 @@
                     <?= $row['quantity'] ?>
                 </td>
                 <td>
-                    <?= $row['amount'] ?>
-                </td>
-                <td>
-                    <?= $row['discount'] ?>
-                </td>
-                <td>
-                    <?= $row['tax'] ?>
-                </td>
-                <td>
                     <?= $row['total'] ?>
                 </td>
             </tr>
@@ -148,94 +268,63 @@
         </tbody>
     </table>
 
-    <h2>Invoice Fields</h2>
+    <div class="lead_time_section">
+        <p>Lead time:</p>
+    </div>
 
-    <table id="invoice_table">
-        <tr>
-            <th>Sub Total</th>
-            <th>Discount</th>
-            <th>Tax</th>
-            <th>Adjustment</th>
-            <th>Grand Total</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="terms_section">
+        <div class="terms_left">
+            <p>Payment Terms: <?= $record['paymentTerm'] ?> Days</p>
+            <p>Delivery Terms: <?= $record['deliveryTerms'] ?> Days</p>
+            <p>&nbsp;</p>
+            <p>Validity: 14 Days</p>
+        </div>
+        <div class="terms_right">
+            <table>
+                <tr>
+                    <td>Sub Total:</td>
+                    <td>MYR 0.00</td>
+                </tr>
+                <tr>
+                    <td>Discount:</td>
+                    <td>(MYR 0.00)</td>
+                </tr>
+            </table>
+            <table class="grand_total">
+                <tr>
+                    <td>Grand Total:</td>
+                    <td>MYR 0.00</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <h2>Term and Conditions</h2>
-    <table id="invoice_table">
-        <tr>
-            <td><?= $record['TermsAndCondition'] ?></td>
-        </tr>
-    </table>
-    <h2>Description Information</h2>
-    <table id="invoice_table">
-        <tr>
-            <td><?= $record['description'] ?></td>
-        </tr>
-    </table>
-
-    <h2>Address Information</h2>
-
-    <table id="invoice_table">
-        <tr>
-            <th>Label</th>
-            <th>Information</th>
-        </tr>
-        <tr>
-            <td>Billing Street</td>
-            <td><?=$record['billingStreet']?></td>
-        </tr>
-        <tr>
-            <td>Shipping Site</td>
-            <td><?=$record['shippingSite']?></td>
-        </tr>
-        <tr>
-            <td>Billing City</td>
-            <td><?=$record['billingCity']?></td>
-        </tr>
-        <tr>
-            <td>Shipping Street</td>
-            <td><?=$record['shippingStreet']?></td>
-        </tr>
-        <tr>
-            <td>Billing State</td>
-            <td><?=$record['billingState']?></td>
-        </tr>
-        <tr>
-            <td>Shipping City</td>
-            <td><?=$record['shippingCity']?></td>
-        </tr>
-        <tr>
-            <td>Shipping State</td>
-            <td><?=$record['shippingState']?></td>
-        </tr>
-        <tr>
-            <td>Billing Code</td>
-            <td><?=$record['billingCode']?></td>
-        </tr>
-        <tr>
-            <td>Shipping Code</td>
-            <td><?=$record['shippingCode']?></td>
-        </tr>
-        <tr>
-            <td>Billing Country</td>
-            <td><?=$record['billingCountry']?></td>
-        </tr>
-        <tr>
-            <td>Shipping Country</td>
-            <td><?=$record['shippingCountry']?></td>
-        </tr>
-    </table>
-
+    <div class="terms_and_conditions">
+        <p class="title">Terms & Conditions</p>
+        <?php
+            $array = preg_split("/\r\n|\n|\r/", $record["termsAndCondition"]);
+            foreach ($array as $line) :
+                echo "<p class='content'>".$line."</p>";
+        endforeach;
+        
+        ?>
+    </div>
+    <div class="last_section">
+        <div class="last_left">
+            <p>We hope that our quotation is favourable to you and we are looking forward to receive your valued orders.
+            </p>
+            <span>If you require further clarification, please do not hesitate to contact us.</span>
+            <p>&#10003 We confirmed the order by accepting the terms & conditions stated above:</p>
+        </div>
+        <div class="last_right">
+            <p>
+                Computer generated, no signature are required
+            </p>
+            <p>
+                ???
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>

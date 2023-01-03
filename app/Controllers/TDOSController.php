@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\ActivityLog;
 use App\Models\TDO;
 use App\Controllers\BaseController;
 
@@ -33,6 +34,14 @@ class TDOSController extends BaseController
     {
         $model = new TDO();
         $model->index($_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "TDO",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/TDO');
     }
 
@@ -40,6 +49,14 @@ class TDOSController extends BaseController
     {
         $model = new TDO();
         $model->deleteTDO($id);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "TDO",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/TDO');
     }
 
@@ -58,6 +75,14 @@ class TDOSController extends BaseController
     {
         $model = new TDO();
         $model->upadteTDO($id, $_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "TDO",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/TDO');
     }
 }

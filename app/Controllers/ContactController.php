@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Contact;
 use App\Models\Masterprefix;
 use App\Models\Masterleadsource;
@@ -47,6 +48,12 @@ class contactController extends BaseController
     {
         $model = new Contact();
         $model->index($_POST);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "contact",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/contact');
     }
 
@@ -54,6 +61,12 @@ class contactController extends BaseController
     {
         $model = new Contact();
         $model->deleteContact($id);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "contact",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/contact');
     }
 
@@ -82,6 +95,12 @@ class contactController extends BaseController
     {
         $model = new Contact();
         $model->upadteContact($id, $_POST);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "contact",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/contact');
     }
 }

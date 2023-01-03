@@ -11,6 +11,7 @@ class Filters extends BaseConfig
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'authGuard' => \App\Filters\AuthGuard::class,
+		'roleGuard' => \App\Filters\RoleGuard::class,
 	];
 	// Always applied before every request
 	public $globals = [

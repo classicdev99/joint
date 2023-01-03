@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Models\Staff;
 
 class staffController extends BaseController {
     public function __construct() {
@@ -12,55 +13,106 @@ class staffController extends BaseController {
         }
     }
     
-    
-    
-    public function account() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Account List', 'li_1'=>'Dashboard', 'li_2'=>'Account List']);
-        $data['role'] = "staff";
-        
-        return view('account/account_list', $data);
+    public function index()
+    {
+        $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Staffs', 'li_1' => 'Dashboard', 'li_2' => 'Staffs']);
+
+        $model = new Staff();
+
+        $data['staffs'] = $model->getStaffs();
+        return view('staff/staff_list', $data);
     }
-    
-    public function account_add() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Add Account', 'li_1'=>'Dashboard', 'li_2'=>'Account', 'li_3'=>'Add Account']);
-        $data['role'] = "staff";
-        
-        return view('account/account_add', $data);
+
+    public function staff_add()
+    {
+        $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Add Staff', 'li_1' => 'Dashboard', 'li_2' => 'Staffs', 'li_3' => 'Add Staff']);
+        return view('staff/staff_add', $data);
     }
-    
-    public function contact() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Contact List', 'li_1'=>'Dashboard', 'li_2'=>'Contact List']);
-        $data['role'] = "staff";
-        
-        return view('contact/contact_list', $data);
+
+    public function save_staff()
+    {
+        $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Staffs', 'li_1' => 'Dashboard', 'li_2' => 'Staffs']);
+
+		helper(['form']);
+
+        $rules = [
+            'name' 		    => 'required|min_length[1]|max_length[20]',
+			'email' 		=> 'required|min_length[3]|max_length[50]|valid_email|is_unique[staffs.email]',
+			'password' 		=> 'required|min_length[1]|max_length[200]',
+            'confirm' 		=> 'required|matches[password]',
+		];
+
+        if($this->validate($rules)){
+			$model = new Staff();
+			$staff = [
+				'name' 	=> $this->request->getVar('name'),
+				'email' 	=> $this->request->getVar('email'),
+				'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'phone_no'    => $this->request->getVar('phone'),
+                'role' => $this->request->getVar('role'),
+			];
+			$model->index($staff);
+            return redirect()->to('/staff/staffs');
+		}else{
+			$data['validation'] = $this->validator;
+			return view('staff/staff_add', $data);
+		}
     }
-    
-    public function lead() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Lead List', 'li_1'=>'Dashboard', 'li_2'=>'Lead List']);
-        $data['role'] = "staff";
-        
-        return view('lead/lead_list', $data);
+
+    public function staff_delete($id)
+    {
+        $model = new Staff();
+        $model->deleteStaff($id);
+        return redirect()->to('/staff/staffs');
     }
-    
-    public function task() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Task List', 'li_1'=>'Dashboard', 'li_2'=>'Task List']);
-        $data['role'] = "staff";
-        
-        return view('task/task_list', $data);
+
+    public function staff_edit($id)
+    {
+        $model = new Staff();
+        $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Update Staff', 'li_1' => 'Dashboard', 'li_2' => 'Staffs', 'li_3' => 'Update Staff']);
+        $data['record'] = $model->editStaff($id);
+        return view('staff/staff_edit', $data);
     }
-    
-    public function product() {
-        $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title'=>'Product List', 'li_1'=>'Dashboard', 'li_2'=>'Product List']);
-        $data['role'] = "staff";
-        
-        return view('product/product_list', $data);
+
+    public function update_staff($id)
+    {
+        $model = new Staff();
+        $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Staffs', 'li_1' => 'Dashboard', 'li_2' => 'Staffs']);
+
+		helper(['form']);
+        $old_email = $model->editStaff($id)['email'];
+        $is_unique = "";
+        if ($this->request->getVar('email') != $old_email)
+            $is_unique = '|is_unique[staffs.email]';
+            
+        $rules = [
+            'name' 		    => 'required|min_length[1]|max_length[20]',
+			'email' 		=> 'required|min_length[3]|max_length[50]|valid_email'.$is_unique,
+			'password' 		=> 'required|min_length[1]|max_length[200]',
+            'confirm' 		=> 'required|matches[password]',
+		];
+
+
+        if($this->validate($rules)){
+
+			$staff = [
+				'name' 	=> $this->request->getVar('name'),
+				'email' 	=> $this->request->getVar('email'),
+				'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'phone_no'    => $this->request->getVar('phone'),
+                'role' => $this->request->getVar('role'),
+			];
+			$model->updateStaff($id,$staff);
+            return redirect()->to('/staff/staffs');
+		}else{
+			$data['validation'] = $this->validator;
+            $data['record'] = $model->editStaff($id);
+			return view('staff/staff_edit', $data);
+		}
     }
-    
-    
 }

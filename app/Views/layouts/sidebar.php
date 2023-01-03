@@ -122,6 +122,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= base_url(session('role') . '/staffs') ?>" class=" waves-effect">
+                        <i class="ri-layout-3-line"></i>
+                        <span>Staffs</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-database-2-line"></i>
                         <span>Master</span>

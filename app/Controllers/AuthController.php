@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;  
+use App\Models\Staff;
 use App\Models\User;
 use CodeIgniter\API\ResponseTrait;
 use Exception;
@@ -82,34 +83,26 @@ class AuthController extends BaseController {
     }
 	
 	public function postLogin() {
-        $model = new User();
+        $model = new Staff();
 	    $role = $this->request->uri->getSegment('1');
 	    $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
-        
-        // $session_data = [
-        //     'user_id' => 1,
-        //     'name' => "Lim Mei Mei",
-        //     'email' => $email,
-        //     'isLoggedIn' => TRUE,
-        //     'role' => $role,
-        // ];
-        // $this->session->set($session_data);
 
-        $user = $model->getUsers($email);
-        if($user){
-            $pass = $user['password'];
+        $staff = $model->getStaffByEmail($email);
+        if($staff){
+            $pass = $staff['password'];
             $verify_pass = password_verify($password, $pass);
             if($verify_pass){
                 $session_data = [
-                    'id'       => $user['id'],
-                    'username'     => $user['username'],
-                    'email'    => $user['email'],
+                    'id'       => $staff['id'],
+                    'username'     => $staff['name'],
+                    'email'    => $staff['email'],
                     'isLoggedIn'     => TRUE,
                     'role' => $role,
+                    'isAdmin' => $staff['role'] == 0,
                 ];
                 $this->session->set($session_data);
-                return redirect()->to('' . session('role') .'/dashboard');
+                return redirect()->to('' . $role .'/dashboard');
             }else{
                 $this->session->setFlashdata('login_error', 'Wrong Password');
                 return redirect()->to($role.'/login');

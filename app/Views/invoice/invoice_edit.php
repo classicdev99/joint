@@ -557,7 +557,7 @@
                                                 <label class="col-form-label">Terms And Condition</label>
                                                 <div class="input-group">
                                                     <textarea class="form-control"
-                                                        name="termsAndCondition"><?= $record['TermsAndCondition'] ?></textarea>
+                                                        name="termsAndCondition"><?= $record['termsAndCondition'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>

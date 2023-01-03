@@ -176,6 +176,15 @@ $routes->group('staff', static function ($routes) {
     //    $routes->get('add_', 'ActivityLogController::activitylog_add', ['filter' => 'authGuard']);
     });
 
+    $routes->group('staffs', static function ($routes) {
+        $routes->get('/', 'StaffController::index', ['filter' => 'roleGuard']);
+        $routes->get('add', 'StaffController::staff_add', ['filter' => 'authGuard']);
+        $routes->get('edit/(:num)', 'StaffController::staff_edit/$1', ['filter' => 'authGuard']);
+        $routes->get('delete/(:num)', 'StaffController::staff_delete/$1', ['filter' => 'authGuard']);
+        $routes->post('save_staff', 'StaffController::save_staff', ['filter' => 'authGuard']);
+        $routes->post('edit_submit/(:num)', 'StaffController::update_staff/$1', ['filter' => 'authGuard']);
+    });
+    
     $routes->group('master', static function ($routes) {
         $routes->get('prefix', 'MasterController::prefix', ['filter' => 'authGuard']);
         $routes->get('leadsource', 'MasterController::leadsource', ['filter' => 'authGuard']);

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Orders;
 use App\Models\Contact;
 
@@ -44,6 +45,15 @@ class OrderController extends BaseController
     {
         $model = new Orders();
         $model->index($_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product order",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
+
+        
         return redirect()->to('/staff/Orders');
     }
 
@@ -51,6 +61,15 @@ class OrderController extends BaseController
     {
         $model = new Orders();
         $model->deleteOrders($id);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product order",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+
+        
         return redirect()->to('/staff/Orders');
     }
 
@@ -73,6 +92,14 @@ class OrderController extends BaseController
     {
         $model = new Orders();
         $model->upadteOrders($id, $_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product order",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+
         return redirect()->to('/staff/Orders');
     }
 }

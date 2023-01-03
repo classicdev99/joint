@@ -7,65 +7,65 @@
     <!-- CSS only -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
     <style>
-        .myTable input {
-            width: 100px;
-        }
+    .myTable input {
+        width: 100px;
+    }
 
-        .invoice-table th {
-            text-align: center;
-        }
+    .invoice-table th {
+        text-align: center;
+    }
 
-        .invoice-fields-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
+    .invoice-fields-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
 
-        .form-control:disabled {
-            background: #f6f6f6 !important;
-        }
+    .form-control:disabled {
+        background: #f6f6f6 !important;
+    }
 
+    .invoice-fields .form-group label {
+        display: inline-block;
+        width: 240px;
+    }
+
+    .invoice-fields .form-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0px;
+    }
+
+    a.btn.cst-btn.btn-primary {
+        background: #9cd6ff8f;
+        color: #0d6efd;
+        line-height: 23px;
+    }
+
+    @media (max-width: 420px) {
         .invoice-fields .form-group label {
-            display: inline-block;
-            width: 240px;
+            display: block;
+            width: 100%;
         }
 
         .invoice-fields .form-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 15px 0px;
+            display: block;
         }
 
-        a.btn.cst-btn.btn-primary {
-            background: #9cd6ff8f;
-            color: #0d6efd;
-            line-height: 23px;
+        .invoice-fields {
+            width: 100%;
         }
 
-        @media (max-width: 420px) {
-            .invoice-fields .form-group label {
-                display: block;
-                width: 100%;
-            }
+    }
 
-            .invoice-fields .form-group {
-                display: block;
-            }
-
-            .invoice-fields {
-                width: 100%;
-            }
-
+    @media (max-width: 991px) {
+        .table-responsive .invoice-table th {
+            font-size: 12px;
         }
-
-        @media (max-width: 991px) {
-            .table-responsive .invoice-table th {
-                font-size: 12px;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -96,7 +96,9 @@
                                         <div class="d-flex flex-row-reverse">
                                             <input type="submit" value="Save" class="btn btn-primary mb-3">
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/Orders') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel create  Product Orders?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/Orders') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel create  Product Orders?');">Cancel</a>
                                         </div>
 
 
@@ -131,7 +133,8 @@
                                                 <label class="col-form-label">Purchase Order</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" id="purchase_owner" name="purchase_owner" class="form-control">
+                                                    <input type="text" id="purchase_owner" name="purchase_owner"
+                                                        class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -162,7 +165,8 @@
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc['accountname'] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc['accountname'] ?>">
+                                                            <?= $acc['accountname'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -230,25 +234,40 @@
                                                             <tr>
                                                                 <td>1</td>
                                                                 <td>
-                                                                    <textarea name="description" id="description" cols="30" rows="1" class="form-control" name="productName" placeholder="description"></textarea>
+                                                                    <textarea name="description" id="description"
+                                                                        cols="30" rows="1" class="form-control"
+                                                                        name="productName"
+                                                                        placeholder="description"></textarea>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="listPrice">
+                                                                    <input type="text"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="listPrice">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="quantity">
+                                                                    <input type="text"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="quantity">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="amount">
+                                                                    <input type="text"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="amount">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" class="invoice-table-input form-control" name="discount">
+                                                                    <input type="text" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="discount">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" class="invoice-table-input form-control" name="tax">
+                                                                    <input type="text" value="0"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="tax">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="invoice-table-input form-control" name="total">
+                                                                    <input type="text"
+                                                                        class="invoice-table-input form-control"
+                                                                        name="total">
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -310,7 +329,8 @@
                                                         <?php
                                                         foreach ($contacts as $contact) {
                                                         ?>
-                                                            <option value="<?= $contact['lastName'] ?>"><?= $contact['lastName'] ?></option>
+                                                        <option value="<?= $contact['lastName'] ?>">
+                                                            <?= $contact['lastName'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -321,7 +341,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Contact</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="shipping_contact" id="" class="form-control">
+                                                    <input type="text" name="shipping_contact" id=""
+                                                        class="form-control">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text h-100"><i class="fa fa-user"></i>
                                                         </div>
@@ -331,104 +352,121 @@
                                             <div class="col-md-6 ">
                                                 <label class="col-form-label">Billing Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billing_street" id="billing_street">
+                                                    <input type="text" class="form-control" name="billing_street"
+                                                        id="billing_street">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_street" id="shipping_street	">
+                                                    <input type="text" class="form-control" name="shipping_street"
+                                                        id="shipping_street	">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing City</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="billing_city" name="billing_city">
+                                                    <input type="text" class="form-control" id="billing_city"
+                                                        name="billing_city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping City </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="shipping_city" name="shipping_city">
+                                                    <input type="text" class="form-control" id="shipping_city"
+                                                        name="shipping_city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing State</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="billing_state" name="billing_state">
+                                                    <input type="text" class="form-control" id="billing_state"
+                                                        name="billing_state">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping State</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_state" id="shipping_state">
+                                                    <input type="text" class="form-control" name="shipping_state"
+                                                        id="shipping_state">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing Code </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billing_code" id="billing_code">
+                                                    <input type="text" class="form-control" name="billing_code"
+                                                        id="billing_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Code</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_code" id="shipping_code">
+                                                    <input type="text" class="form-control" name="shipping_code"
+                                                        id="shipping_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Billing Country</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="billing_country" id="billing_country">
+                                                    <input type="text" class="form-control" name="billing_country"
+                                                        id="billing_country">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Country </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="shipping_country" id="shipping_country">
+                                                    <input type="text" class="form-control" name="shipping_country"
+                                                        id="shipping_country">
                                                 </div>
                                             </div>
                                             <h6 class="my-3">Additional Information</h6>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Delivery Terms </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="delivery_term" id="delivery_term">
+                                                    <input type="text" class="form-control" name="delivery_term"
+                                                        id="delivery_term">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Transporter </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="transporter" id="transporter">
+                                                    <input type="text" class="form-control" name="transporter"
+                                                        id="transporter">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Payment Terms </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="paymetn_terms" id="paymetn_terms">
+                                                    <input type="text" class="form-control" name="payment_terms"
+                                                        id="payment_terms">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Delivery ETA </label>
                                                 <div class="input-group">
-                                                    <input type="date" class="form-control" name="delivery_ETA" id="delivery_ETA">
+                                                    <input type="date" class="form-control" name="delivery_ETA"
+                                                        id="delivery_ETA">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Prepration For Customer Site </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="custome_site_preprationsv" id="custome_site_preprationsv">
+                                                    <input type="text" class="form-control"
+                                                        name="custome_site_preprationsv" id="custome_site_preprationsv">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Delivery ETA Remark </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="delivery_remark" id="delivery_remark">
+                                                    <input type="text" class="form-control" name="delivery_remark"
+                                                        id="delivery_remark">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">SE Remark </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="se_remark" id="se_remark">
+                                                    <input type="text" class="form-control" name="se_remark"
+                                                        id="se_remark">
                                                 </div>
                                             </div>
                                             <h6 class="my-3">Technical-Installation</h6>
@@ -446,7 +484,8 @@
                                                 <div class="col-md-12	">
                                                     <label class="col-form-label">Date Of Installation </label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="install_date" id="install_date">
+                                                        <input type="date" class="form-control" name="install_date"
+                                                            id="install_date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -462,7 +501,8 @@
                                                 <div class="col-md-12 ">
                                                     <label class="col-form-label">Installation texh Mgr Comment </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="install_tech" id="install_tech">
+                                                        <input type="text" class="form-control" name="install_tech"
+                                                            id="install_tech">
                                                     </div>
                                                 </div>
                                             </div>
@@ -471,7 +511,8 @@
                                                 <div class="col-md-12">
                                                     <label class="col-form-label">Callbration Assigned to </label>
                                                     <div class="input-group">
-                                                        <select name="callibration_assign" id="callibration_assign" class="form-control">
+                                                        <select name="callibration_assign" id="callibration_assign"
+                                                            class="form-control">
                                                             <option value="Option 1">Option 1</option>
                                                             <option value="Option 2">Option 2</option>
                                                         </select>
@@ -481,13 +522,15 @@
                                                 <div class="col-md-12	">
                                                     <label class="col-form-label">Date Of Callbration </label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="callibration_date" id="callibration_date">
+                                                        <input type="date" class="form-control" name="callibration_date"
+                                                            id="callibration_date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class="col-form-label">Callbration Stage </label>
                                                     <div class="input-group">
-                                                        <select name="callibration_stage" id="callibration_stage" class="form-control">
+                                                        <select name="callibration_stage" id="callibration_stage"
+                                                            class="form-control">
                                                             <option value="Option 1">Option 1</option>
                                                             <option value="Option 2">Option 2</option>
                                                         </select>
@@ -498,7 +541,8 @@
                                                 <div class="col-md-12 ">
                                                     <label class="col-form-label">Callbration texh Mgr Comment </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="callibration_tech" id="callibration_tech">
+                                                        <input type="text" class="form-control" name="callibration_tech"
+                                                            id="callibration_tech">
                                                     </div>
                                                 </div>
                                             </div>
@@ -517,7 +561,8 @@
                                                 <div class="col-md-12	">
                                                     <label class="col-form-label">Date Of Training </label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="install_date" id="training_date">
+                                                        <input type="date" class="form-control" name="install_date"
+                                                            id="training_date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -533,7 +578,8 @@
                                                 <div class="col-md-12 ">
                                                     <label class="col-form-label">Training texh Mgr Comment </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="install_tech" id="install_tech">
+                                                        <input type="text" class="form-control" name="install_tech"
+                                                            id="install_tech">
                                                     </div>
                                                 </div>
                                             </div>
@@ -543,13 +589,15 @@
                                                 <div class="col-md-12">
                                                     <label class="col-form-label">Date Of Meeting </label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="meeting_date" id="meeting_date">
+                                                        <input type="date" class="form-control" name="meeting_date"
+                                                            id="meeting_date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 ">
                                                     <label class="col-form-label">Comment From Customer </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="comment" id="comment">
+                                                        <input type="text" class="form-control" name="comment"
+                                                            id="comment">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -581,7 +629,8 @@
                                             <div class="col-md-8">
                                                 <label class="col-form-label">Terms and conditions </label>
                                                 <div class="input-group">
-                                                    <textarea name="terms_conditions" id="" cols="30" rows="" class="form-control"></textarea>
+                                                    <textarea name="terms_conditions" id="" cols="30" rows=""
+                                                        class="form-control"></textarea>
 
                                                 </div>
                                             </div>
@@ -589,7 +638,8 @@
                                             <div class="col-md-8">
                                                 <label class="col-form-label">Description </label>
                                                 <div class="input-group">
-                                                    <textarea name="description" id="" cols="30" rows="" class="form-control"></textarea>
+                                                    <textarea name="description" id="" cols="30" rows=""
+                                                        class="form-control"></textarea>
                                                 </div>
                                             </div>
 

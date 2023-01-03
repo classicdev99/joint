@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Deal;
 use App\Models\Contact;
 
@@ -40,6 +41,14 @@ class DealController extends BaseController
     {
         $model = new Deal();
         $model->index($_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "deal",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/deal');
     }
 
@@ -47,6 +56,14 @@ class DealController extends BaseController
     {
         $model = new Deal();
         $model->deleteDeal($id);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "deal",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+
         return redirect()->to('/staff/deal');
     }
 
@@ -69,6 +86,14 @@ class DealController extends BaseController
     {
         $model = new Deal();
         $model->updateDeal($id, $_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "deal",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/deal');
     }
 }

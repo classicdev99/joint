@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Lead;
 use App\Models\Masterleadstatus;
 use App\Models\Masterleadsource;
@@ -52,7 +53,12 @@ class leadController extends BaseController {
     public function create_lead()
     {
 		$this->leadModel->save($this->request->getPost());
-
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "lead",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
 		return redirect(''.session('role').'/lead')->with('status', 'Leads inserted Successfully');
     }
 
@@ -85,7 +91,12 @@ class leadController extends BaseController {
     public function save_update($id = null)
     {
 		$this->leadModel->update($id, $this->request->getPost());
-
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "lead",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
 		return redirect(''.session('role').'/lead')->with('status', 'Lead updated Successfully');
     }
 
@@ -103,7 +114,12 @@ class leadController extends BaseController {
     public function lead_delete($id = null)
     {
         $this->leadModel->delete($id);
-
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "lead",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
 		return redirect(''.session('role').'/lead')->with('status', 'Lead Successfully Deleted');
     }
 }

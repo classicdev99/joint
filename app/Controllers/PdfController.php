@@ -19,7 +19,7 @@ class PdfController extends Controller
 
         $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
         $data['page_title'] = view('layouts/page-title', ['title' => 'Edit Quote', 'li_1' => 'Dashboard', 'li_2' => 'Quotes', 'li_3' => 'Edit Quote']);
-        $data['record'] = $model->editInvoice(11);
+        $data['record'] = $model->editInvoice(12);
         $data['invoice_items'] = $invoiceItem->getItemsForInvoice(11);
 
         $contact = new Contact();

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Product;
 
 use App\Controllers\BaseController;
@@ -38,6 +39,14 @@ class ProductController extends BaseController
     {
         $model = new Product();
         $model->index($_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/product');
     }
 
@@ -45,6 +54,14 @@ class ProductController extends BaseController
     {
         $model = new Product();
         $model->deleteProduct($id);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/product');
     }
 
@@ -63,6 +80,14 @@ class ProductController extends BaseController
     {
         $model = new Product();
         $model->upadteProduct($id, $_POST);
+
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "product",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
+        
         return redirect()->to('/staff/product');
     }
 }

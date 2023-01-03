@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Task;
 use App\Models\Contact;
 
@@ -41,6 +42,12 @@ class taskController extends BaseController
     {
         $model = new Task();
         $model->index($_POST);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "task",
+            'action' => "create",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/task');
     }
 
@@ -48,6 +55,12 @@ class taskController extends BaseController
     {
         $model = new Task();
         $model->deleteTask($id);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "task",
+            'action' => "delete",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/task');
     }
 
@@ -70,6 +83,12 @@ class taskController extends BaseController
     {
         $model = new Task();
         $model->upadteTask($id, $_POST);
+        $activityLog = new ActivityLog();
+        $log = [
+            'activity' => "task",
+            'action' => "update",
+        ];
+        $activityLog->index($log);
         return redirect()->to('/staff/task');
     }
 }
