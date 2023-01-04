@@ -83,15 +83,6 @@
                                             </form>
                                         </div>
 
-                                        <div class="mt-5 text-center">
-                                            <p>Don't have an account ? <a
-                                                    href="<?php echo base_url('/'.$role.'/register') ?>"
-                                                    class="fw-medium text-primary"> Register </a> </p>
-                                            <!-- <p>© <script>
-                                                document.write(new Date().getFullYear())
-                                                </script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                                by Themesdesign</p> -->
-                                        </div>
                                     </div>
                                 </div>
                             </div>
