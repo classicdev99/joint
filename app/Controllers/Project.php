@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProjectModel;
 use App\Models\ProjectTaskModel;
+use App\Models\Task;
 class Project extends BaseController
 {
     public function index()
@@ -35,6 +36,7 @@ class Project extends BaseController
             $result['error']=false;
             $result['message']='Updated Successfully';
         }
+        $this->update_calendar();
         echo json_encode($result);
     }
     
@@ -53,6 +55,7 @@ class Project extends BaseController
         $projectModel->where('id', $id)->delete($id);
         $result['error']=false;
         $result['message']='Deleted Successfully';
+        $this->update_calendar();
         echo json_encode($result);
     } 
     
@@ -86,6 +89,7 @@ class Project extends BaseController
             $result['error']=false;
             $result['message']='Updated Successfully';
         }
+        $this->update_calendar();
         echo json_encode($result);
     }
 
@@ -104,6 +108,31 @@ class Project extends BaseController
         $projectModel->where('id', $id)->delete($id);
         $result['error']=false;
         $result['message']='Deleted Successfully';
+        $this->update_calendar();
         echo json_encode($result);
     } 
+    public function update_calendar(){
+        $taskModel = new Task();
+        $tasks = $taskModel->getTasks();
+        $index = 0;
+        $data = [];
+        foreach($tasks as  $one){
+            $data[$index]['title'] = $one['subject'];
+            $data[$index]['start'] = $one['due_date'];
+            $data[$index]['end'] = $one['due_date'];
+            $data[$index]['backgroundColor'] = "#00a65a";
+            $index++;
+        }
+
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
+        foreach($projects as $one){
+            $data[$index]['title'] = $one['project_name'];
+            $data[$index]['start'] = $one['start_date'];
+            $data[$index]['end'] = $one['end_date'];
+            $data[$index]['backgroundColor'] = "#1A87B6";
+            $index++;
+        }
+        $this->session->set("events", $data);
+    }
 }

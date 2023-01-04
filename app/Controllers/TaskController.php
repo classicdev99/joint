@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\ProjectModel;
 use App\Models\Task;
 use App\Models\Contact;
 
@@ -48,6 +49,7 @@ class taskController extends BaseController
             'action' => "create",
         ];
         $activityLog->index($log);
+        $this->update_calendar();
         return redirect()->to('/staff/task');
     }
 
@@ -61,6 +63,7 @@ class taskController extends BaseController
             'action' => "delete",
         ];
         $activityLog->index($log);
+        $this->update_calendar();
         return redirect()->to('/staff/task');
     }
 
@@ -89,6 +92,32 @@ class taskController extends BaseController
             'action' => "update",
         ];
         $activityLog->index($log);
+        $this->update_calendar();
         return redirect()->to('/staff/task');
+    }
+
+    public function update_calendar(){
+        $taskModel = new Task();
+        $tasks = $taskModel->getTasks();
+        $index = 0;
+        $data = [];
+        foreach($tasks as  $one){
+            $data[$index]['title'] = $one['subject'];
+            $data[$index]['start'] = $one['due_date'];
+            $data[$index]['end'] = $one['due_date'];
+            $data[$index]['backgroundColor'] = "#00a65a";
+            $index++;
+        }
+
+        $projectModel = new ProjectModel();
+        $projects = $projectModel->findAll();
+        foreach($projects as $one){
+            $data[$index]['title'] = $one['project_name'];
+            $data[$index]['start'] = $one['start_date'];
+            $data[$index]['end'] = $one['end_date'];
+            $data[$index]['backgroundColor'] = "#1A87B6";
+            $index++;
+        }
+        $this->session->set("events", $data);
     }
 }

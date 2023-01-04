@@ -120,6 +120,7 @@ var date = new Date()
 var d = date.getDate(),
     m = date.getMonth(),
     y = date.getFullYear()
+var events = <?php echo json_encode(session('events')) ?>;
 
 function showCalendar() {
     $('.bs-example-modal-xll').modal('show');
@@ -136,7 +137,7 @@ $('#calendar').fullCalendar({
         week: 'week',
         day: 'day'
     },
-
+    events: events
 })
 
 function showProducts() {
