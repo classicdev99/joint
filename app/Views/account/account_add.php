@@ -5,18 +5,18 @@
     <?= $this->include('layouts/title-meta') ?>
     <?= $this->include('layouts/css') ?>
     <style>
-        .cross {
-            margin-right: 10px;
-            margin-left: 10px;
-            font-size: 150%;
-            cursor: pointer;
-            color: black;
-            transition: all ease-in-out .5s;
-        }
+    .cross {
+        margin-right: 10px;
+        margin-left: 10px;
+        font-size: 150%;
+        cursor: pointer;
+        color: black;
+        transition: all ease-in-out .5s;
+    }
 
-        .cross:hover {
-            color: dodgerblue;
-        }
+    .cross:hover {
+        color: dodgerblue;
+    }
     </style>
 </head>
 
@@ -41,20 +41,25 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <form action="<?= base_url(session('role') . '/account/create'); ?>" enctype="multipart/form-data" method="POST">
+                                <form action="<?= base_url(session('role') . '/account/create'); ?>"
+                                    enctype="multipart/form-data" method="POST">
                                     <div class="card-body">
                                         <div class="d-flex flex-row-reverse">
-                                            <button type="submit" name="submitaddaccount" class="btn btn-primary mb-3">Save</button>
+                                            <button type="submit" name="submitaddaccount"
+                                                class="btn btn-primary mb-3">Save</button>
                                             <!-- <a href="<?= base_url(session('role') . '/account/add_submit') ?>" class="btn btn-primary mb-3">Save</a> -->
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/account') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel add account?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/account') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel add account?');">Cancel</a>
                                         </div>
 
                                         <div class="row mb-5">
                                             <h6 class="mb-3">Account Image</h6>
                                             <div class="col-md-12">
                                                 <input type="hidden" name="createdby" value="<?php echo $createdby; ?>">
-                                                <input class="form-control" type="file" name="image" accept="image/png, image/jpeg">
+                                                <input class="form-control" type="file" name="image"
+                                                    accept="image/png, image/jpeg">
                                             </div>
                                         </div>
                                         <div class="row mb-5">
@@ -70,11 +75,12 @@
                                                         <option value="4">Owner 4</option>
                                                     </select>
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Rating</label>
                                                 <div class="input-group">
@@ -84,7 +90,8 @@
                                                         <?php 
                                                         foreach($ratings as $rating)
                                                         { ?>
-                                                        <option value="<?php echo $rating['id'];?>"><?php echo $rating['name'];?></option>
+                                                        <option value="<?php echo $rating['id'];?>">
+                                                            <?php echo $rating['name'];?></option>
                                                         <?php 
                                                         } ?>
                                                     </select>
@@ -103,19 +110,20 @@
                                                 <label class="col-form-label">Account Name</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" name="accountname" class="form-control" value="" >
+                                                    <input type="text" name="accountname" class="form-control" value="">
                                                     <?php if(0){ ?>
                                                     <select name="accountname" class="form-select">
                                                         <option hidden>-None-</option>
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc['accountname'] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc['accountname'] ?>">
+                                                            <?= $acc['accountname'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
-                                                <?php } ?>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
 
@@ -146,7 +154,8 @@
                                                 <div class="input-group">
                                                     <input name="parentaccount" type="text" class="form-control">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-users"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-users"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,7 +192,8 @@
                                                         <?php 
                                                         foreach($industres as $industry)
                                                         { ?>
-                                                        <option value="<?php echo $industry['id'];?>"><?php echo $industry['name'];?></option>
+                                                        <option value="<?php echo $industry['id'];?>">
+                                                            <?php echo $industry['name'];?></option>
                                                         <?php 
                                                         } ?>
                                                     </select>
@@ -200,9 +210,11 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Annual Revenue</label>
                                                 <div class="input-group">
-                                                    <input name="annualrevenue" type="text" class="form-control" placeholder="MYR">
+                                                    <input name="annualrevenue" type="text" class="form-control"
+                                                        placeholder="MYR">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-info"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-info"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,11 +237,12 @@
                                                 <label class="col-form-label">Action Required</label>
                                                 <div class="input-group">
                                                     <select name="actionrequired" class="form-select">
-                                                      <option hidden>-None-</option>
-                                                      <?php 
+                                                        <option hidden>-None-</option>
+                                                        <?php 
                                                         foreach($actionRequireds as $actionRequired)
                                                         { ?>
-                                                        <option value="<?php echo $actionRequired['id'];?>"><?php echo $actionRequired['name'];?></option>
+                                                        <option value="<?php echo $actionRequired['id'];?>">
+                                                            <?php echo $actionRequired['name'];?></option>
                                                         <?php 
                                                         } ?>
                                                     </select>
@@ -251,11 +264,12 @@
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
                                                     <select name="customertype" class="form-select">
-                                                       <option hidden>-None-</option>
+                                                        <option hidden>-None-</option>
                                                         <?php 
                                                         foreach($customertypes as $customertype)
                                                         { ?>
-                                                        <option value="<?php echo $customertype['id'];?>"><?php echo $customertype['name'];?></option>
+                                                        <option value="<?php echo $customertype['id'];?>">
+                                                            <?php echo $customertype['name'];?></option>
                                                         <?php 
                                                         } ?>
                                                     </select>
@@ -280,7 +294,8 @@
                                                         <?php 
                                                         foreach($paymentterms as $paymentterm)
                                                         { ?>
-                                                        <option value="<?php echo $paymentterm['id'];?>"><?php echo $paymentterm['name'];?></option>
+                                                        <option value="<?php echo $paymentterm['id'];?>">
+                                                            <?php echo $paymentterm['name'];?></option>
                                                         <?php 
                                                         } ?>
                                                     </select>

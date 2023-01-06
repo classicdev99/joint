@@ -49,6 +49,13 @@ class Project extends BaseController
         echo json_encode($result);
     }
  
+    public function graph($id = null){
+        $projectModel = new ProjectTaskModel(); 
+        $tasks = $projectModel->where('project_id',$id)->findAll();
+        $result['error'] = false;
+        $result['message'] = $tasks;
+        echo json_encode($result);
+    }
     // delete user
     public function delete($id = null){
         $projectModel = new ProjectModel();

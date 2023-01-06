@@ -122,6 +122,8 @@ $routes->group('staff', static function ($routes) {
         $routes->post('taskStore', 'Project::taskStore', ['filter' => 'authGuard']);
         $routes->get('taskSingleData/(:num)', 'Project::taskSingleData/$1', ['filter' => 'authGuard']);
         $routes->get('taskDelete/(:num)', 'Project::taskDelete/$1', ['filter' => 'authGuard']);
+
+        $routes->get('graph/(:num)', 'Project::graph/$1', ['filter' => 'authGuard']);
     });
 
     $routes->group('product', static function ($routes) {

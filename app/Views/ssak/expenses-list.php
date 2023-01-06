@@ -192,6 +192,15 @@
                                                     id="expense_voucher_number" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="row m-2">
+                                            <label class="col-sm-2 col-form-label"
+                                                for="expense_attchment">Attachment</label>
+                                            <div class="col-sm-10 ">
+                                                <input class="form-control" type="file" name="attachment"
+                                                    accept="All files/*">
+                                                <p name="old_attachment" id="old_attachment"></p>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <div class="modal-footer">
@@ -283,12 +292,24 @@
                 if (responce.error) {
                     // $.notify(responce.message, "warn",{arrowSize: 20});
                 } else {
+                    var fileName = responce.message.attachment;
+                    if (fileName != null) {
+                        var n = fileName.lastIndexOf("/");
+                        fileName = fileName.substr(n + 1);
+                    }
+
+
                     $('#edit_id').val(responce.message.id);
-                    $('#expense_type').val(responce.message.expense_type);
+                    $('#expense_type').val(responce.message
+                        .expense_type);
                     $('#expense_date').val(responce.message.expense_date);
-                    $('#expense_amount').val(responce.message.expense_amount);
-                    $('#remark').val(responce.message.remark);
-                    $('#expense_voucher_number').val(responce.message.expense_voucher_number);
+                    $(
+                        '#expense_amount').val(responce.message.expense_amount);
+                    $('#remark').val(
+                        responce.message.remark);
+                    $('#expense_voucher_number').val(responce.message
+                        .expense_voucher_number);
+                    $('#old_attachment').html(fileName);
                     $('.bs-example-modal-xl').modal('show');
                 }
             },

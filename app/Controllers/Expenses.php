@@ -17,12 +17,21 @@ class Expenses extends BaseController
     public function store() {
         $expensesModel = new ExpensesModel();
         $id = $this->request->getVar('id');
+        $file = $this->request->getFile('attachment');
+        $attachment = null;
+        if ($file->getName()) {
+            $file->move(ROOTPATH . 'public/uploads/expenses',null, true);
+
+            $attachment = 'uploads/expenses/' . $file->getName();
+        }
+
         $data = [
             'expense_type' => $this->request->getVar('expense_type'),
             'expense_date'  => $this->request->getVar('expense_date'),
             'expense_amount'  => $this->request->getVar('expense_amount'),
             'remark'  => $this->request->getVar('remark'),
             'expense_voucher_number'  => $this->request->getVar('expense_voucher_number'),
+            'attachment' => $attachment,
         ];
         if(empty($id))
         {
