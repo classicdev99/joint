@@ -32,6 +32,7 @@ class Expenses extends BaseController
             'remark'  => $this->request->getVar('remark'),
             'expense_voucher_number'  => $this->request->getVar('expense_voucher_number'),
             'attachment' => $attachment,
+            'category' => $this->request->getPost('category'),
         ];
         if(empty($id))
         {

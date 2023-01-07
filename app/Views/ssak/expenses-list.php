@@ -103,6 +103,7 @@
                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
+                                                <th>Category</th>
                                                 <th>Expense Type</th>
                                                 <th>Expense Date</th>
                                                 <th>Expense Amount</th>
@@ -114,6 +115,7 @@
                                         <tbody>
                                             <?php foreach($data as $value){ ?>
                                             <tr>
+                                                <td><?php echo $value['category']; ?></td>
                                                 <td><?php echo $value['expense_type']; ?></td>
                                                 <td><?php echo $value['expense_date']; ?></td>
                                                 <td><?php echo $value['expense_amount']; ?></td>
@@ -151,7 +153,42 @@
                                 <form action="<?php echo base_url(session('role'));?>/expenses/save" method="post"
                                     id="manageForm">
                                     <div class="modal-body">
-
+                                        <div class="row m-2">
+                                            <label class="col-sm-2 col-form-label" for="category">Category</label>
+                                            <div class="col-sm-10 ">
+                                                <select class="form-select" name="category" id="category">
+                                                    <option value="Allowance-Outstation">Allowance-Outstation</option>
+                                                    <option value="Allowance-Accomodation">Allowance-Accomodation
+                                                    </option>
+                                                    <option value="Travel-Meal">Travel-Meal</option>
+                                                    <option value="Travel-Transport/Flight">Travel-Transport/Flight
+                                                    </option>
+                                                    <option value="Travel-Hotel">Travel-Hotel</option>
+                                                    <option value="Toll">Toll</option>
+                                                    <option value="Parking">Parking</option>
+                                                    <option value="Petrol/Mileage">Petrol/Mileage</option>
+                                                    <option value="Handphone Bill">Handphone Bill</option>
+                                                    <option value="Postage">Postage</option>
+                                                    <option value="Printing & Stationaries">Printing & Stationaries
+                                                    </option>
+                                                    <option value="Staff Welfare-Dining">Staff Welfare-Dining</option>
+                                                    <option value="Staff Welfare-Biscuits">Staff Welfare-Biscuits
+                                                    </option>
+                                                    <option value="Entertainment">Entertainment</option>
+                                                    <option value="Office Consumable (disposable)">Office Consumable
+                                                        (disposable)</option>
+                                                    <option value="Car Service">Car Service</option>
+                                                    <option value="Upkeep-Office Equip">Upkeep-Office Equip</option>
+                                                    <option value="Upkeep-Office/Building">Upkeep-Office/Building
+                                                    </option>
+                                                    <option value="Cash Purchase-for sell">Cash Purchase-for sell
+                                                    </option>
+                                                    <option value="Cash Purchase-for tech repair">Cash Purchase-for tech
+                                                        repair</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="row m-2">
                                             <label class="col-sm-2 col-form-label" for="expense_type">Expense
                                                 Type</label>
@@ -228,8 +265,6 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
-
-
 
     <script type="text/javascript">
     function add() {
@@ -309,6 +344,7 @@
                         responce.message.remark);
                     $('#expense_voucher_number').val(responce.message
                         .expense_voucher_number);
+                    $('#category option[value=' + responce.message.category + ']').prop('selected', true);
                     $('#old_attachment').html(fileName);
                     $('.bs-example-modal-xl').modal('show');
                 }
