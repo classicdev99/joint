@@ -28,8 +28,6 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="<?= base_url(session('role') . '/staffs/add') ?>"
-                                        class="btn btn-primary mb-3">Add Staff</a> &nbsp;
                                     <div class="table-rep-plugin">
                                         <div class="table-responsive mb-0" data-pattern="priority-columns">
                                             <table id="tech-companies-1" class="table table-bordered">
