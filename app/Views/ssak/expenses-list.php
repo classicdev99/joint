@@ -85,10 +85,31 @@
                 <?= $this->include('layouts/page-title') ?>
 
                 <div class="container-fluid">
-
-
-
-
+                    <?php
+                    $categories = array(
+                        "Allowance-Outstation",
+                        "Allowance-Accomodation",
+                        "Travel-Meal",
+                        "Travel-Transport/Flight",
+                        "Travel-Hotel",
+                        "Toll",
+                        "Parking",
+                        "Petrol/Mileage",
+                        "Handphone Bill",
+                        "Postage",
+                        "Printing & Stationaries",
+                        "Staff Welfare-Dining",
+                        "Staff Welfare-Biscuits",
+                        "Entertainment",
+                        "Office Consumable (disposable)",
+                        "Car Service",
+                        "Upkeep-Office Equip",
+                        "Upkeep-Office/Building",
+                        "Cash Purchase-for sell",
+                        "Cash Purchase-for tech repair",
+                        "Others",
+                    );
+                    ?>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -115,7 +136,11 @@
                                         <tbody>
                                             <?php foreach($data as $value){ ?>
                                             <tr>
-                                                <td><?php echo $value['category']; ?></td>
+
+                                                <td><?php
+                                                $index = intval($value['category']);
+                                                echo $categories[$index - 1];
+                                                ?></td>
                                                 <td><?php echo $value['expense_type']; ?></td>
                                                 <td><?php echo $value['expense_date']; ?></td>
                                                 <td><?php echo $value['expense_amount']; ?></td>
@@ -157,35 +182,35 @@
                                             <label class="col-sm-2 col-form-label" for="category">Category</label>
                                             <div class="col-sm-10 ">
                                                 <select class="form-select" name="category" id="category">
-                                                    <option value="Allowance-Outstation">Allowance-Outstation</option>
-                                                    <option value="Allowance-Accomodation">Allowance-Accomodation
+                                                    <option value="1">Allowance-Outstation</option>
+                                                    <option value="2">Allowance-Accomodation
                                                     </option>
-                                                    <option value="Travel-Meal">Travel-Meal</option>
-                                                    <option value="Travel-Transport/Flight">Travel-Transport/Flight
+                                                    <option value="3">Travel-Meal</option>
+                                                    <option value="4">Travel-Transport/Flight
                                                     </option>
-                                                    <option value="Travel-Hotel">Travel-Hotel</option>
-                                                    <option value="Toll">Toll</option>
-                                                    <option value="Parking">Parking</option>
-                                                    <option value="Petrol/Mileage">Petrol/Mileage</option>
-                                                    <option value="Handphone Bill">Handphone Bill</option>
-                                                    <option value="Postage">Postage</option>
-                                                    <option value="Printing & Stationaries">Printing & Stationaries
+                                                    <option value="5">Travel-Hotel</option>
+                                                    <option value="6">Toll</option>
+                                                    <option value="7">Parking</option>
+                                                    <option value="8">Petrol/Mileage</option>
+                                                    <option value="9">Handphone Bill</option>
+                                                    <option value="10">Postage</option>
+                                                    <option value="11">Printing & Stationaries
                                                     </option>
-                                                    <option value="Staff Welfare-Dining">Staff Welfare-Dining</option>
-                                                    <option value="Staff Welfare-Biscuits">Staff Welfare-Biscuits
+                                                    <option value="12">Staff Welfare-Dining</option>
+                                                    <option value="13">Staff Welfare-Biscuits
                                                     </option>
-                                                    <option value="Entertainment">Entertainment</option>
-                                                    <option value="Office Consumable (disposable)">Office Consumable
+                                                    <option value="14">Entertainment</option>
+                                                    <option value="15">Office Consumable
                                                         (disposable)</option>
-                                                    <option value="Car Service">Car Service</option>
-                                                    <option value="Upkeep-Office Equip">Upkeep-Office Equip</option>
-                                                    <option value="Upkeep-Office/Building">Upkeep-Office/Building
+                                                    <option value="16">Car Service</option>
+                                                    <option value="17">Upkeep-Office Equip</option>
+                                                    <option value="18">Upkeep-Office/Building
                                                     </option>
-                                                    <option value="Cash Purchase-for sell">Cash Purchase-for sell
+                                                    <option value="19">Cash Purchase-for sell
                                                     </option>
-                                                    <option value="Cash Purchase-for tech repair">Cash Purchase-for tech
+                                                    <option value="20">Cash Purchase-for tech
                                                         repair</option>
-                                                    <option value="Others">Others</option>
+                                                    <option value="21">Others</option>
                                                 </select>
                                             </div>
                                         </div>
