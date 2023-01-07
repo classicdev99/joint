@@ -7,6 +7,7 @@ use App\Models\InvoiceItem;
 use App\Models\Invoices;
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\Staff;
 
 class InvoiceController extends BaseController
 {
@@ -74,7 +75,8 @@ class InvoiceController extends BaseController
             'billingCountry'      => $this->request->getPost('billingCountry'),
             'shippingCode'      => $this->request->getPost('shippingCode'),
             'shippingCountry'      => $this->request->getPost('shippingCountry'),
-             'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
+            'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
+            'staff_id' => session('id'),
             // 'description'      => $this->request->getPost('description'),
             // 'listPrice'      => $this->request->getPost('listPrice'),
             // 'quantity'      => $this->request->getPost('quantity'),
@@ -84,7 +86,8 @@ class InvoiceController extends BaseController
             // 'total'      => $this->request->getPost('total'),
         ];
         $invoice_id = $model->index($invoice);
-
+        $staffModel = new Staff();
+        $staffModel->addSales(session('id'));
         $activityLog = new ActivityLog();
         $log = [
             'activity' => "invoice",
@@ -177,7 +180,7 @@ class InvoiceController extends BaseController
             'billingCountry'      => $this->request->getPost('billingCountry'),
             'shippingCode'      => $this->request->getPost('shippingCode'),
             'shippingCountry'      => $this->request->getPost('shippingCountry'),
-             'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
+            'TermsAndCondition'      => $this->request->getPost('termsAndCondition'),
             // 'description'      => $this->request->getPost('description'),
             // 'listPrice'      => $this->request->getPost('listPrice'),
             // 'quantity'      => $this->request->getPost('quantity'),

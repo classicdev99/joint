@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Event;
 use App\Models\LeaveModel;
 use App\Models\ProjectModel;
+use App\Models\Staff;
 use App\Models\Task;
 class Home extends BaseController
 {
@@ -20,7 +21,6 @@ class Home extends BaseController
     public function dashboard() {
         $data['title_meta'] = view('layouts/title-meta', ['title'=>'Dashboard']);
         $data['page_title'] = view('layouts/page-title', ['title'=>'Dashboard', 'li_1'=>'Dashboard']);
-        $model = new Event();
 
         $taskModel = new Task();
         $tasks = $taskModel->getTasks();
@@ -65,6 +65,12 @@ class Home extends BaseController
            
         }
         $this->session->set("notifications", $data['notifications']);
+
+        $staffModel = new Staff();
+        $staff = $staffModel->getStaffs(session('id'));
+
+        $data['staff']['kpi'] = $staff['kpi'];
+        $data['staff']['sales'] = $staff['sales'];
         return view('dashboard', $data);
     }
 }

@@ -187,6 +187,11 @@ $routes->group('staff', static function ($routes) {
         $routes->post('save_staff', 'StaffController::save_staff', ['filter' => 'authGuard']);
         $routes->post('edit_submit/(:num)', 'StaffController::update_staff/$1', ['filter' => 'authGuard']);
     });
+
+    $routes->group('kpi', static function ($routes) {
+        $routes->get('/', 'KpiController::index', ['filter' => 'roleGuard']);
+        $routes->post('newkpi/(:num)', 'KpiController::update_kpi/$1', ['filter' => 'authGuard']);
+    });
     
     $routes->group('master', static function ($routes) {
         $routes->get('prefix', 'MasterController::prefix', ['filter' => 'authGuard']);

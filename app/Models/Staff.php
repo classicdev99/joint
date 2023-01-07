@@ -53,7 +53,7 @@ class Staff extends Model
         if ($id === false) {
             return $this->findAll();
         } else {
-            return $this->getWhere(['id' => $id]);
+            return $this->where(['id' => $id])->first();;
         }
     }
 
@@ -78,5 +78,16 @@ class Staff extends Model
     {
         $query = $this->db->table($this->table)->update($postData, array('id' => $id));
         return $query;
+    }
+
+    public function addSales($id)
+    {
+
+        $staff = $this->where('id', $id)->first();
+        $data = [
+            'sales' => $staff['sales'] + 1,
+        ];
+        $this->updateStaff($id, $data);
+    
     }
 }

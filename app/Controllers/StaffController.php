@@ -53,6 +53,8 @@ class staffController extends BaseController {
 				'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'phone_no'    => $this->request->getVar('phone'),
                 'role' => $this->request->getVar('role'),
+                'kpi' => 0,
+                'sales' => 0,
 			];
 			$model->index($staff);
             return redirect()->to('/staff/staffs');

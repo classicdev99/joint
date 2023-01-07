@@ -30,8 +30,16 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-1 overflow-hidden">
+                                                <?php if (session('isAdmin') == true) {
+                                                    ?>
                                                 <p class="text-truncate font-size-14 mb-2">Number of Sales</p>
-                                                <h4 class="mb-0">1452</h4>
+                                                <h4 class="mb-0">9999</h4>
+                                                <?php }?>
+                                                <?php if (session('isAdmin') == false) {
+                                                    ?>
+                                                <p class="text-truncate font-size-14 mb-2">KPI</p>
+                                                <h4 class="mb-0"><?php echo $staff['kpi']; ?></h4>
+                                                <?php }?>
                                             </div>
                                             <div class="text-primary ms-auto">
                                                 <i class="ri-stack-line font-size-24"></i>
@@ -54,8 +62,16 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-1 overflow-hidden">
+                                                <?php if (session('isAdmin') == true) {
+                                                    ?>
                                                 <p class="text-truncate font-size-14 mb-2">Sales Revenue</p>
                                                 <h4 class="mb-0">$ 38452</h4>
+                                                <?php }?>
+                                                <?php if (session('isAdmin') == false) {
+                                                    ?>
+                                                <p class="text-truncate font-size-14 mb-2">Current Sales</p>
+                                                <h4 class="mb-0"><?php echo $staff['sales']; ?></h4>
+                                                <?php }?>
                                             </div>
                                             <div class="text-primary ms-auto">
                                                 <i class="ri-store-2-line font-size-24"></i>
