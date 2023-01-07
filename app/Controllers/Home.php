@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Event;
+use App\Models\LeaveModel;
 use App\Models\ProjectModel;
 use App\Models\Task;
 class Home extends BaseController
@@ -50,7 +51,20 @@ class Home extends BaseController
         //     $data['events'][$key]['end'] = $value->end_date;
         //     $data['events'][$key]['backgroundColor'] = "#00a65a";
         // }     
-        
+
+        $index = 0;
+        $data['notifications'] = [];
+        if(session('isAdmin')){
+            $leaveModel = new LeaveModel();
+            $leaves = $leaveModel->where('state', 0)->findAll();
+            foreach($leaves as $leave){
+                $data['notifications'][$index]['title'] = 'Leave Application Requested.';
+                $data['notifications'][$index]['detail'] = $leave['employee_name'];
+                $index++;
+            }
+           
+        }
+        $this->session->set("notifications", $data['notifications']);
         return view('dashboard', $data);
     }
 }

@@ -93,6 +93,7 @@ $routes->group('staff', static function ($routes) {
         $routes->post('save', 'Leave::store', ['filter' => 'authGuard']);
         $routes->get('edit-view/(:num)', 'Leave::singleData/$1', ['filter' => 'authGuard']);
         $routes->get('delete/(:num)', 'Leave::delete/$1', ['filter' => 'authGuard']);
+        $routes->post('approve/(:num)', 'Leave::approve/$1', ['filter' => 'authGuard']);
     });
     $routes->group('expenses', static function ($routes) {
         $routes->get('/', 'Expenses::index', ['filter' => 'authGuard']);

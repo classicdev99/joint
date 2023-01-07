@@ -30,7 +30,7 @@
                                 <div class="card-body">
                                     <a href="<?= base_url(session('role') . '/invoice/add') ?>"
                                         class="btn btn-primary mb-3">Add Invoice</a> &nbsp;
-                                    <a href="<?= base_url(session('role') . '/pdf') ?>"
+                                    <a href="<?= base_url(session('role') . '/invoice') ?>"
                                         class="btn btn-light mb-3">Refresh</a>
                                     <div class="table-rep-plugin">
                                         <div class="table-responsive mb-0" data-pattern="priority-columns">

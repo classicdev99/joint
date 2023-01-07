@@ -24,6 +24,7 @@ class Leave extends BaseController
             'from_date'  => $this->request->getVar('from_date'),
             'till_date'  => $this->request->getVar('till_date'),
             'employee_name'  => $this->request->getVar('employee_name'),
+            'state' => 0,
         ];
         if(empty($id))
         {
@@ -76,4 +77,18 @@ class Leave extends BaseController
         $activityLog->index($log);
         echo json_encode($result);
     }  
+
+    public function approve($id =null){
+
+        $leaveModel = new LeaveModel();
+        $leaveModel->where('id', $id)->first();
+        $result['error']=false;
+        $result['message']='Approved Successfully';
+
+        $data = [
+            'state' => $this->request->getPost('state'),
+        ];
+        $leaveModel->update($id, $data);
+        echo json_encode($result);
+    }
 }
