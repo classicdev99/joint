@@ -53,7 +53,14 @@ class Account extends Model
         'updatedby',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'secondaryphone',
+        'country',
+        'region',
+        'address1',
+        'address2',
+        'address3',
+        'city'
     ];
 
     // Dates

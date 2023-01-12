@@ -28,7 +28,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="<?= base_url(session('role') . '/contact/add') ?>" class="btn btn-primary mb-3">Add Contact</a>
+                                    <a href="<?= base_url(session('role') . '/contact/add') ?>"
+                                        class="btn btn-primary mb-3">Add Contact</a>
 
                                     <div class="table-rep-plugin">
                                         <div class="table-responsive mb-0" data-pattern="priority-columns">
@@ -36,7 +37,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckDefault">
                                                         </th>
                                                         <th>Contact Name</th>
                                                         <th>Account Name</th>
@@ -49,27 +51,31 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($contacts as $row) : ?>
-                                                        <tr>
-                                                            <td><input class="form-check-input" type="checkbox" value="<?= $row['id']; ?>" id="flexCheckDefault"></td>
-                                                            <td><?= $row['lastName'] ?></td>
-                                                            <td><?= $row['accountName'] ?></td>
-                                                            <td><?= $row['email'] ?></td>
-                                                            <td>
-                                                                <a href="https://wa.me/<?= $row['mobile']; ?>">
+                                                    <tr>
+                                                        <td><input class="form-check-input" type="checkbox"
+                                                                value="<?= $row['id']; ?>" id="flexCheckDefault"></td>
+                                                        <td><?= $row['lastName'] ?></td>
+                                                        <td><?= $row['accountName'] ?></td>
+                                                        <td><?= $row['email'] ?></td>
+                                                        <td>
+                                                            <a href="https://wa.me/<?= $row['mobile']; ?>">
                                                                 <?= $row['mobile'] ?>
-                                                                </a> 
-                                                            </td>
-                                                            <td><?= $row['contactOwner'] ?></td>
-                                                            <td>Ali</td>
-                                                            <td>
-                                                                <a href="<?= base_url(session('role') . '/contact/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm" title="Update Contact">
-                                                                    <i class='fas fa-edit'></i>
-                                                                </a>
-                                                                <a href="<?= base_url(session('role') . '/contact/delete/' . $row['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?');">
-                                                                    <i class="fas fa-trash-alt" title="Delete Account"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+                                                            </a>
+                                                        </td>
+                                                        <td><?= $row['contactOwner'] ?></td>
+                                                        <td>Ali</td>
+                                                        <td>
+                                                            <a href="<?= base_url(session('role') . '/contact/edit/' . $row['id']) ?>"
+                                                                class="btn btn-primary btn-sm" title="Update Contact">
+                                                                <i class='fas fa-edit'></i>
+                                                            </a>
+                                                            <a href="<?= base_url(session('role') . '/contact/delete/' . $row['id']) ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Do you want to delete?');">
+                                                                <i class="fas fa-trash-alt" title="Delete Account"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>

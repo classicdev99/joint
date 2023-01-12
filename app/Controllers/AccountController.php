@@ -63,16 +63,16 @@ class accountController extends BaseController
 
     public function create_account()
     {
-        $file = $this->request->getFile('image');
+        // $file = $this->request->getFile('image');
 
-        if ($file->getName()) {
-            $file->move(ROOTPATH . 'public/uploads/accounts');
+        // if ($file->getName()) {
+        //     $file->move(ROOTPATH . 'public/uploads/accounts');
 
-            $image = 'uploads/accounts/' . $file->getName();
-        }
+        //     $image = 'uploads/accounts/' . $file->getName();
+        // }
 
         $data = [
-            'image'    => $image ? $image : '',
+        //    'image'    => $image ? $image : '',
             'accountowner'      => $this->request->getPost('accountowner'),
             'accountname'       => $this->request->getPost('accountname'),
             'accountemail'      => $this->request->getPost('accountemail'),
@@ -107,6 +107,13 @@ class accountController extends BaseController
             'descinformation'   => $this->request->getPost('descinformation'),
             'systeminfo'        => $this->request->getPost('systeminfo'),
             'createdby'         => $this->request->getPost('createdby'),
+            'secondaryphone'    => $this->request->getPost('secondaryphone'),
+            'country'           => $this->request->getPost('country'),
+            'region'            => $this->request->getPost('region'),
+            'address1'          => $this->request->getPost('address1'),
+            'address2'          => $this->request->getPost('address2'),
+            'address3'          => $this->request->getPost('address3'),
+            'city'              => $this->request->getPost('city'),
         ];
 
         $this->accountModel->save($data);
@@ -150,18 +157,7 @@ class accountController extends BaseController
 
     public function save_update($id = null)
     {
-        $file = $this->request->getFile('image');
-
-        if ($file->getName()) {
-            $file->move(ROOTPATH . 'public/uploads/accounts');
-            $image = 'uploads/accounts/' . $file->getName();
-        } else {
-            $accountdata = $this->accountModel->find($id);
-            $image = $accountdata['image'];
-        }
-
         $data = [
-            'image'                => $image,
             'accountowner'      => $this->request->getPost('accountowner'),
             'accountname'       => $this->request->getPost('accountname'),
             'accountemail'      => $this->request->getPost('accountemail'),

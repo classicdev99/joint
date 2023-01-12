@@ -27,14 +27,17 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <form action="<?= base_url(session('role') . '/contact/edit_submit/' . $record['id']) ?>" method="POST">
+                                <form
+                                    action="<?= base_url(session('role') . '/contact/edit_submit/' . $record['id']) ?>"
+                                    method="POST">
                                     <div class="card-body">
                                         <div class="d-flex flex-row-reverse">
                                             <input type="submit" value="Save" class="btn btn-primary mb-3">
                                             &ensp;
-                                            <a href="<?= base_url(session('role') . '/contact') ?>" class="btn btn-secondary mb-3" onclick="return confirm('Cancel create contact?');">Cancel</a>
+                                            <a href="<?= base_url(session('role') . '/contact') ?>"
+                                                class="btn btn-secondary mb-3"
+                                                onclick="return confirm('Cancel create contact?');">Cancel</a>
                                         </div>
-
                                         <div class="row mb-5">
                                             <h6 class="mb-3">Contact Information</h6>
                                             <div class="col-md-6">
@@ -45,7 +48,8 @@
                                                         <option value="contact owner two">contact owner two</option>
                                                     </select>
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,17 +57,20 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Accounts</label>
                                                 <div class="input-group">
-                                                    <select class="form-select" name="AccountId" id="AccountId" onchange="getInfo(this);">
+                                                    <select class="form-select" name="AccountId" id="AccountId"
+                                                        onchange="getInfo(this);">
                                                         <?php
                                                         foreach ($account as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc["id"] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc["id"] ?>"><?= $acc['accountname'] ?>
+                                                        </option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,7 +82,10 @@
                                                         <?php
                                                         foreach ($leadsources as $leadsource) {
                                                         ?>
-                                                            <option <?=$record['leadSource']==$leadsource["id"]?'selected':''?> value="<?= $leadsource['id'] ?>"><?= $leadsource['name'] ?></option>
+                                                        <option
+                                                            <?=$record['leadSource']==$leadsource["id"]?'selected':''?>
+                                                            value="<?= $leadsource['id'] ?>"><?= $leadsource['name'] ?>
+                                                        </option>
                                                         <?php
                                                         }
                                                         ?>
@@ -92,7 +102,8 @@
                                                         <?php
                                                         foreach ($prefixes as $prefix) {
                                                         ?>
-                                                            <option <?=$record['leadSource']==$prefix["id"]?'selected':''?> value="<?= $prefix['id'] ?>"><?= $prefix['name'] ?></option>
+                                                        <option <?=$record['leadSource']==$prefix["id"]?'selected':''?>
+                                                            value="<?= $prefix['id'] ?>"><?= $prefix['name'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -116,14 +127,16 @@
                                                 <label class="col-form-label">Last Name</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" value="<?= $record['lastName'] ?>" class="form-control" name="lastName">
+                                                    <input type="text" value="<?= $record['lastName'] ?>"
+                                                        class="form-control" name="lastName">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Title</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['title'] ?>" class="form-control" name="title">
+                                                    <input type="text" value="<?= $record['title'] ?>"
+                                                        class="form-control" name="title">
                                                 </div>
                                             </div>
 
@@ -137,20 +150,23 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Accounts Name</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['accountName'] ?>" class="form-control" name="AccountName" id="AccountName">
+                                                    <input type="text" value="<?= $record['accountName'] ?>"
+                                                        class="form-control" name="AccountName" id="AccountName">
                                                     <?php if(0){ ?>
                                                     <select class="form-select" name="AccountName" id="AccountName">
                                                         <?php
                                                         foreach ($account as $acc) {
                                                         ?>
-                                                            <option value="<?= $acc['accountname'] ?>"><?= $acc['accountname'] ?></option>
+                                                        <option value="<?= $acc['accountname'] ?>">
+                                                            <?= $acc['accountname'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
                                                     <?php } ?>
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,9 +174,11 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other Phone</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherPhone'] ?>" class="form-control" name="otherPhone">
+                                                    <input type="text" value="<?= $record['otherPhone'] ?>"
+                                                        class="form-control" name="otherPhone">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-users"></i></div>
+                                                        <div class="input-group-text h-100"><i class="fa fa-users"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +187,8 @@
                                                 <label class="col-form-label">Email</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" value="<?= $record['email'] ?>" class="form-control" name="email">
+                                                    <input type="text" value="<?= $record['email'] ?>"
+                                                        class="form-control" name="email">
                                                 </div>
                                             </div>
 
@@ -177,49 +196,56 @@
                                                 <label class="col-form-label">Mobile</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" value="<?= $record['mobile'] ?>" class="form-control" name="mobile">
+                                                    <input type="text" value="<?= $record['mobile'] ?>"
+                                                        class="form-control" name="mobile">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Phone</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['phone'] ?>" class="form-control" name="phone">
+                                                    <input type="text" value="<?= $record['phone'] ?>"
+                                                        class="form-control" name="phone">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Assistant</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['assistant'] ?>" class="form-control" name="assistant">
+                                                    <input type="text" value="<?= $record['assistant'] ?>"
+                                                        class="form-control" name="assistant">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Department</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['department'] ?>" class="form-control" name="department">
+                                                    <input type="text" value="<?= $record['department'] ?>"
+                                                        class="form-control" name="department">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Source Remark</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['sourceRemark'] ?>" class="form-control" name="sourceRemark">
+                                                    <input type="text" value="<?= $record['sourceRemark'] ?>"
+                                                        class="form-control" name="sourceRemark">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Home Phone</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['homePhone'] ?>" class="form-control" name="homePhone">
+                                                    <input type="text" value="<?= $record['homePhone'] ?>"
+                                                        class="form-control" name="homePhone">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label"></label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="emailOptOut" id="flexCheckDefault">
+                                                    <input class="form-check-input" type="checkbox" name="emailOptOut"
+                                                        id="flexCheckDefault">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Email Opt Out
                                                     </label>
@@ -229,42 +255,48 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Fax</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['fax'] ?>" class="form-control" name="fax">
+                                                    <input type="text" value="<?= $record['fax'] ?>"
+                                                        class="form-control" name="fax">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Secondary Email</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['secondaryEmail'] ?>" class="form-control" name="secondaryEmail">
+                                                    <input type="text" value="<?= $record['secondaryEmail'] ?>"
+                                                        class="form-control" name="secondaryEmail">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Date of Birth</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['dateofBirth'] ?>" class="form-control" name="dateofBirth">
+                                                    <input type="text" value="<?= $record['dateofBirth'] ?>"
+                                                        class="form-control" name="dateofBirth">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Secondary Mobile Phone</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['secondaryMobilePhone'] ?>" class="form-control" name="secondaryMobilePhone">
+                                                    <input type="text" value="<?= $record['secondaryMobilePhone'] ?>"
+                                                        class="form-control" name="secondaryMobilePhone">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Asst Phone</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['asstPhone'] ?>" class="form-control" name="asstPhone">
+                                                    <input type="text" value="<?= $record['asstPhone'] ?>"
+                                                        class="form-control" name="asstPhone">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Reporting To</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['reportingTo'] ?>" class="form-control" name="reportingTo">
+                                                    <input type="text" value="<?= $record['reportingTo'] ?>"
+                                                        class="form-control" name="reportingTo">
                                                 </div>
                                             </div>
 
@@ -273,10 +305,13 @@
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
                                                     <select class="form-select" name="customerType">
-                                                         <?php
+                                                        <?php
                                                         foreach ($customertypes as $customertype) {
                                                         ?>
-                                                            <option <?=$record['customerType']==$customertype["id"]?'selected':''?> value="<?= $customertype['id'] ?>"><?= $customertype['name'] ?></option>
+                                                        <option
+                                                            <?=$record['customerType']==$customertype["id"]?'selected':''?>
+                                                            value="<?= $customertype['id'] ?>">
+                                                            <?= $customertype['name'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -294,7 +329,10 @@
                                                         <?php
                                                         foreach ($productcategoryes as $productcategory) {
                                                         ?>
-                                                            <option <?=$record['categoriesProduct']==$productcategory["id"]?'selected':''?> value="<?= $productcategory['id'] ?>"><?= $productcategory['name'] ?></option>
+                                                        <option
+                                                            <?=$record['categoriesProduct']==$productcategory["id"]?'selected':''?>
+                                                            value="<?= $productcategory['id'] ?>">
+                                                            <?= $productcategory['name'] ?></option>
                                                         <?php
                                                         }
                                                         ?>
@@ -307,7 +345,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Contact Secoond Email</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['contactSecoondEmail'] ?>" class="form-control" name="contactSecoondEmail">
+                                                    <input type="text" value="<?= $record['contactSecoondEmail'] ?>"
+                                                        class="form-control" name="contactSecoondEmail">
                                                 </div>
                                             </div>
 
@@ -339,8 +378,10 @@
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
                                                     <select class="form-select" name="currentPICName">
-                                                        <option value="current pic name one">current pic name one</option>
-                                                        <option value="current pic name two">current pic name two</option>
+                                                        <option value="current pic name one">current pic name one
+                                                        </option>
+                                                        <option value="current pic name two">current pic name two
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -365,70 +406,80 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Mailing Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['mailingStreet'] ?>" class="form-control" name="mailingStreet">
+                                                    <input type="text" value="<?= $record['mailingStreet'] ?>"
+                                                        class="form-control" name="mailingStreet">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other Street</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherStreet'] ?>" class="form-control" name="otherStreet">
+                                                    <input type="text" value="<?= $record['otherStreet'] ?>"
+                                                        class="form-control" name="otherStreet">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Mailing City</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['mailingCity'] ?>" class="form-control" name="mailingCity">
+                                                    <input type="text" value="<?= $record['mailingCity'] ?>"
+                                                        class="form-control" name="mailingCity">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other City</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherCity'] ?>" class="form-control" name="otherCity">
+                                                    <input type="text" value="<?= $record['otherCity'] ?>"
+                                                        class="form-control" name="otherCity">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Mailing State</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['mailingState'] ?>" class="form-control" name="mailingState">
+                                                    <input type="text" value="<?= $record['mailingState'] ?>"
+                                                        class="form-control" name="mailingState">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other State</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherState'] ?>" class="form-control" name="otherState">
+                                                    <input type="text" value="<?= $record['otherState'] ?>"
+                                                        class="form-control" name="otherState">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Mailing Code</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['mailingCode'] ?>" class="form-control" name="mailingCode">
+                                                    <input type="text" value="<?= $record['mailingCode'] ?>"
+                                                        class="form-control" name="mailingCode">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other Code</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherCode'] ?>" class="form-control" name="otherCode">
+                                                    <input type="text" value="<?= $record['otherCode'] ?>"
+                                                        class="form-control" name="otherCode">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Mailing Country</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['mailingCountry'] ?>" class="form-control" name="mailingCountry">
+                                                    <input type="text" value="<?= $record['mailingCountry'] ?>"
+                                                        class="form-control" name="mailingCountry">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Other Country</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="<?= $record['otherCountry'] ?>" class="form-control" name="otherCountry">
+                                                    <input type="text" value="<?= $record['otherCountry'] ?>"
+                                                        class="form-control" name="otherCountry">
                                                 </div>
                                             </div>
                                         </div>
@@ -438,7 +489,8 @@
                                             <div class="col-md-12">
                                                 <label class="col-form-label">Description</label>
                                                 <div class="input-group">
-                                                    <textarea class="form-control" name="description"><?= $record['description'] ?></textarea>
+                                                    <textarea class="form-control"
+                                                        name="description"><?= $record['description'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -465,12 +517,11 @@
             </div>
             <!-- End Page-content -->
             <script type="text/javascript">
-                function getInfo(e)
-                { 
-                   var a= $('#AccountId option:selected').text();
-                   $('#AccountName').val(a);
+            function getInfo(e) {
+                var a = $('#AccountId option:selected').text();
+                $('#AccountName').val(a);
 
-                }
+            }
             </script>
             <?= $this->include('layouts/footer') ?>
 

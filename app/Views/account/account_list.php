@@ -42,12 +42,13 @@
                                                         </th>
                                                         <th></th>
                                                         <th>Account Name</th>
-                                                        <th>Billing Street</th>
+                                                        <!-- <th>Billing Street</th> -->
+                                                        <th>Rating</th>
                                                         <th>Industy</th>
                                                         <th>Payment Term</th>
                                                         <th>Phone</th>
                                                         <th>Territory</th>
-                                                        <th>Account Owner</th>
+                                                        <th>Website</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -67,7 +68,8 @@
                                                         <td><a
                                                                 href="<?= base_url(session('role') . '/account/view/' . $account['id']) ?>"><?= $account['accountname']; ?></a>
                                                         </td>
-                                                        <td><?= $account['billstreet']; ?></td>
+                                                        <!-- <td><?= $account['billstreet']; ?></td> -->
+                                                        <td><?= $account['rating']; ?></td>
                                                         <td><?= $account['industry']; ?></td>
                                                         <td><?= $account['paymentterm']; ?></td>
                                                         <td>
@@ -76,7 +78,7 @@
                                                             </a>
                                                         </td>
                                                         <td><?= $account['territory']; ?></td>
-                                                        <td><?= $account['accountowner']; ?></td>
+                                                        <td><?= $account['website']; ?></td>
                                                         <td>
                                                             <a href="<?= base_url(session('role') . '/account/edit/' . $account['id']) ?>"
                                                                 class="btn btn-primary btn-sm" title="Update Account">

@@ -17,10 +17,19 @@
     .cross:hover {
         color: dodgerblue;
     }
+
+    .sticky-top {
+        height: 50px;
+        position: sticky;
+        top: 80px;
+    }
     </style>
+
+
 </head>
 
 <body data-sidebar="dark">
+
     <!-- Begin page -->
     <div id="layout-wrapper">
         <?= $this->include('layouts/topbar') ?>
@@ -32,18 +41,20 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
+
         <div class="main-content" id="result">
+
             <div class="page-content">
                 <?= $this->include('layouts/page-title') ?>
 
                 <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <form action="<?= base_url(session('role') . '/account/create'); ?>"
                                     enctype="multipart/form-data" method="POST">
                                     <div class="card-body">
+
                                         <div class="d-flex flex-row-reverse">
                                             <button type="submit" name="submitaddaccount"
                                                 class="btn btn-primary mb-3">Save</button>
@@ -55,58 +66,9 @@
                                         </div>
 
                                         <div class="row mb-5">
-                                            <h6 class="mb-3">Account Image</h6>
-                                            <div class="col-md-12">
-                                                <input type="hidden" name="createdby" value="<?php echo $createdby; ?>">
-                                                <input class="form-control" type="file" name="image"
-                                                    accept="image/png, image/jpeg">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-5">
                                             <h6 class="mb-3">Account Information</h6>
                                             <div class="col-md-6">
-                                                <label class="col-form-label">Account Owner</label>
-                                                <div class="input-group">
-                                                    <select name="accountowner" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                        <option value="1">Owner 1</option>
-                                                        <option value="2">Owner 2</option>
-                                                        <option value="3">Owner 3</option>
-                                                        <option value="4">Owner 4</option>
-                                                    </select>
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-user"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Rating</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select name="rating" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                        <?php 
-                                                        foreach($ratings as $rating)
-                                                        { ?>
-                                                        <option value="<?php echo $rating['id'];?>">
-                                                            <?php echo $rating['name'];?></option>
-                                                        <?php 
-                                                        } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- <div class="col-md-6">
-                                                <label class="col-form-label">Account Name</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input name="accountname" type="text" class="form-control">
-                                                </div>
-                                            </div> -->
-
-                                            <div class="col-md-6">
+                                                <input type="hidden" name="createdby" value="<?php echo $createdby; ?>">
                                                 <label class="col-form-label">Account Name</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
@@ -126,67 +88,61 @@
                                                     <?php } ?>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
+                                                <label class="col-form-label">Rating</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <select name="rating" class="form-select">
+                                                        <option hidden>-None-</option>
+                                                        <?php 
+                                                        foreach($ratings as $rating)
+                                                        { ?>
+                                                        <option value="<?php echo $rating['id'];?>">
+                                                            <?php echo $rating['name'];?></option>
+                                                        <?php 
+                                                        } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
                                                 <label class="col-form-label">Phone</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input name="phonenumber" type="text" class="form-control">
+                                                    <input name="phonenumber" type="tel" class="form-control"
+                                                        id="phonenumber">
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Account Site</label>
+                                            <div class="col-md-3">
+                                                <label class="col-form-label">Secondary Phone</label>
                                                 <div class="input-group">
-                                                    <input name="accountsite" type="text" class="form-control">
+                                                    <div class="col-md-1">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="hassecondaryphone" name="hassecondaryphone">
+                                                    </div>
+                                                    <div class="col-md-11" id="secondary" name="secondary">
+                                                        <input name="secondaryphone" type="tel" class="form-control"
+                                                            id="secondaryphone">
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Fax</label>
                                                 <div class="input-group">
-                                                    <input name="fax" type="text" class="form-control">
+                                                    <input id="fax" name="fax" type="tel" class="form-control">
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Parent Account</label>
-                                                <div class="input-group">
-                                                    <input name="parentaccount" type="text" class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-users"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Website</label>
                                                 <div class="input-group">
                                                     <input name="website" type="text" class="form-control">
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Account Number</label>
-                                                <div class="input-group">
-                                                    <input name="accountnumber" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Ownership</label>
-                                                <div class="input-group">
-                                                    <select name="ownership" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Industry</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <select name="industry" class="form-select">
                                                         <option hidden>-None-</option>
                                                         <?php 
@@ -199,70 +155,11 @@
                                                     </select>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Employees</label>
-                                                <div class="input-group">
-                                                    <input name="employees" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Annual Revenue</label>
-                                                <div class="input-group">
-                                                    <input name="annualrevenue" type="text" class="form-control"
-                                                        placeholder="MYR">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text h-100"><i class="fa fa-info"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">SIC Code</label>
-                                                <div class="input-group">
-                                                    <input name="sicccode" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Source Remark</label>
-                                                <div class="input-group">
-                                                    <input name="sourceremark" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Action Required</label>
-                                                <div class="input-group">
-                                                    <select name="actionrequired" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                        <?php 
-                                                        foreach($actionRequireds as $actionRequired)
-                                                        { ?>
-                                                        <option value="<?php echo $actionRequired['id'];?>">
-                                                            <?php echo $actionRequired['name'];?></option>
-                                                        <?php 
-                                                        } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Territory</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select name="territory" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Customer Type</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <select name="customertype" class="form-select">
                                                         <option hidden>-None-</option>
                                                         <?php 
@@ -275,17 +172,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Current PIC Name</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select name="currentpic" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Payment Term</label>
                                                 <div class="input-group">
@@ -301,109 +187,57 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Account Email</label>
+                                                <label class="col-form-label">Account/General Email</label>
                                                 <div class="input-group">
                                                     <input name="accountemail" type="text" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row mb-5">
                                             <h6 class="mb-3">Address Information</h6>
+
                                             <div class="col-md-6">
-                                                <label class="col-form-label">Billing Street</label>
+                                                <label class="form-label">Country</label>
                                                 <div class="input-group">
-                                                    <input name="billstreet" type="text" class="form-control">
+                                                    <select id="country" name="country" class="form-control gds-cr"
+                                                        country-data-region-id="region" data-language="en"></select>
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-6">
+                                                <label for="region" class="form-label">Region</label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="region" name="region"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="col-form-label">Address-1</label>
+                                                <div class="input-group">
+                                                    <input name="address1" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="col-form-label">Address-2</label>
+                                                <div class="input-group">
+                                                    <input name="address2" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="col-form-label">Address-3</label>
+                                                <div class="input-group">
+                                                    <input name="address3" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="col-form-label">City</label>
+                                                <div class="input-group">
+                                                    <input name="city" type="text" class="form-control">
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Shipping Street</label>
                                                 <div class="input-group">
                                                     <input name="shipstreet" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing City</label>
-                                                <div class="input-group">
-                                                    <input name="billcity" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping City</label>
-                                                <div class="input-group">
-                                                    <input name="shipcity" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing State</label>
-                                                <div class="input-group">
-                                                    <input name="billstate" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping State</label>
-                                                <div class="input-group">
-                                                    <input name="shipstate" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing Code</label>
-                                                <div class="input-group">
-                                                    <input name="billcode" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Code</label>
-                                                <div class="input-group">
-                                                    <input name="shipcode" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing Country</label>
-                                                <div class="input-group">
-                                                    <input name="billcountry" type="text" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Country</label>
-                                                <div class="input-group">
-                                                    <input name="shipcountry" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-5">
-                                            <h6 class="mb-3">Description Information</h6>
-                                            <div class="col-md-12">
-                                                <label class="col-form-label">Description</label>
-                                                <div class="input-group">
-                                                    <textarea name="descinformation" class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-5">
-                                            <h6 class="mb-3">System Information</h6>
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Bee Owner</label>
-                                                <div class="input-group">
-                                                    <select name="systeminfo" class="form-select">
-                                                        <option hidden>-None-</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -426,62 +260,11 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
-    <!-- <script>
-        var data = [];
-        var idxs = [];
-        var Select = $('#selcont');
-        var txtid = $('#contactsId');
-        var name = $('#contacts');
-        Select.on('change', function(e) {
-            var optionSelected = $("option:selected", this);
-            var selectId = this.value;
-            var selectText = optionSelected.text();
-            if (selectId != "-1") {
-                if (selectId != "")
-                    AddData(selectId, selectText);
-            }
-        });
+    <?= $this->include('script/account_phone') ?>
+    <?= $this->include('script/country') ?>
+    <script>
 
-        function AddData(id, name) {
-            data.push({
-                "id": id,
-                "text": name
-            });
-            idxs.push(id);
-            $('#cont-' + id).remove();
-            $('#contacts').append('<span class="cross" id="txt-' + id + '" onclick="removeData(' + id + ')">' + name + '</span>');
-            txtid.val(idxs.join(','));
-        }
-
-        function removeData(id) {
-            var txt = '';
-            idxs = removeItemAll(idxs, id);
-            var i = 0;
-            while (i < data.length) {
-                if (data[i].id === id) {
-                    txt = data[i].text;
-                    data.splice(i, 1);
-                } else {
-                    ++i;
-                }
-            }
-            Select.append('<option id="cont-' + id + '" value="' + id + '">' + txt + '</option>');
-            $('#txt-' + id).remove();
-            txtid.val(idxs.join(','));
-        }
-
-        function removeItemAll(arr, value) {
-            var i = 0;
-            while (i < arr.length) {
-                if (arr[i] == value) {
-                    arr.splice(i, 1);
-                } else {
-                    ++i;
-                }
-            }
-            return arr;
-        }
-    </script> -->
+    </script>
 </body>
 
 </html>
