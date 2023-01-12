@@ -59,7 +59,7 @@ class QuoteController extends BaseController
         $quoteItem = new QuoteItem();
         $activityLog = new ActivityLog();
         $quote = [
-            'quote_name'      => $this->request->getPost('quote_name'),
+            // 'quote_name'      => $this->request->getPost('quote_name'),
             'subject'       => $this->request->getPost('subject'),
             'pic_name'      => $this->request->getPost('pic_name'),
             'account_name'       => $this->request->getPost('account_name'),
@@ -152,7 +152,7 @@ class QuoteController extends BaseController
         $quoteItem = new QuoteItem();
         $activityLog = new ActivityLog();
         $quote = [
-            'quote_name'      => $this->request->getPost('quote_name'),
+            // 'quote_name'      => $this->request->getPost('quote_name'),
             'subject'       => $this->request->getPost('subject'),
             'pic_name'      => $this->request->getPost('pic_name'),
             'account_name'       => $this->request->getPost('account_name'),

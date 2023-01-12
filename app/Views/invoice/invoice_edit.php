@@ -106,15 +106,6 @@
                                             <h6 class="mb-3">Invoice Information</h6>
 
                                             <div class="col-md-6">
-                                                <label class="col-form-label">Invoice Owner</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="invoiceOwner"
-                                                        value="<?= $record['invoiceOwner'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
                                                 <label class="col-form-label">Product Order</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
@@ -151,15 +142,6 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label class="col-form-label">Excise Duty</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="exciseDuty"
-                                                        value="<?= $record['exciseDuty'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
                                                 <label class="col-form-label">Due Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
@@ -175,15 +157,6 @@
                                                         <option value="tdo name one">tdo name one</option>
                                                         <option value="tdo name two">tdo name two</option>
                                                     </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Sales Commision</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="salesCommision"
-                                                        value="<?= $record['salesCommision'] ?>">
                                                 </div>
                                             </div>
 
@@ -440,112 +413,6 @@
                                                         <label>Grand Total</label>
                                                         <input type="text" id="sum_grand_total" class="form-control" />
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-5">
-                                            <h6 class="mb-3">Adress Information</h6>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing Street</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="billingStreet"
-                                                        value="<?= $record['billingStreet'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Site</label>
-                                                <div class="input-group">
-                                                    <select class="form-select" name="shippingSite">
-                                                        <option value="tdo name one">tdo name one</option>
-                                                        <option value="tdo name two">tdo name two</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing City</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="billingCity"
-                                                        value="<?= $record['billingCity'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Street</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="shippingStreet"
-                                                        value="<?= $record['shippingStreet'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing State</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="billingState"
-                                                        value="<?= $record['billingState'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping City</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="shippingCity"
-                                                        value="<?= $record['shippingCity'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing Code</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="billingCode"
-                                                        value="<?= $record['billingCode'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping State</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="shippingState"
-                                                        value="<?= $record['shippingState'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Billing Country</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="billingCountry"
-                                                        value="<?= $record['billingCountry'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Code</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="shippingCode"
-                                                        value="<?= $record['shippingCode'] ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6"></div>
-
-                                            <div class="col-md-6">
-                                                <label class="col-form-label">Shipping Country</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="shippingCountry"
-                                                        value="<?= $record['shippingCountry'] ?>">
                                                 </div>
                                             </div>
                                         </div>

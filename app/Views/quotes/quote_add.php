@@ -58,7 +58,6 @@
         .invoice-fields {
             width: 100%;
         }
-
     }
 
     @media (max-width: 991px) {
@@ -125,14 +124,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-
-                                            <!-- <div class="col-md-6">
-                                                <label class="col-form-label">Account Name</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <input type="text" class="form-control" name="account_name">
-                                                </div>
-                                            </div> -->
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Account Name</label>
@@ -292,7 +283,7 @@
                                                             </select>
                                                         </div>
                                                         <label class="col-form-label">Value in MYR</label>
-                                                        <input type="number" value="1" min="0.00" readonly
+                                                        <input type="number" value="1" min="0.00"
                                                             class="invoice-table-input form-control"
                                                             name="currency_value" id="currency_value">
                                                     </div>
