@@ -262,10 +262,10 @@ $.fn.updateSummary = function() {
         val = parseInt(val);
         if (val > 0)
             discount += parseInt(val);
-        val = $('#addr' + j).find("[name='tax" + j + "']").val();
-        val = parseInt(val);
-        if (val > 0)
-            tax += parseInt(val);
+        //val = $('#addr' + j).find("[name='tax" + j + "']").val();
+        //val = parseInt(val);
+        //if (val > 0)
+        //    tax += parseInt(val);
     }
     adjustment = subTotal - tax;
     grandTotal = subTotal - discount;

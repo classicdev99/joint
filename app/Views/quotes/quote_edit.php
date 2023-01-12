@@ -272,7 +272,6 @@
                                                                 <th>Quantity</th>
                                                                 <th>Amount</th>
                                                                 <th>Discount</th>
-                                                                <th>Tax</th>
                                                                 <th>Total</th>
                                                             </tr>
                                                         </thead>
@@ -308,11 +307,6 @@
                                                                         class="invoice-table-input form-control"
                                                                         name=<?="discount".$i?>
                                                                         value="<?= $row['discount'] ?>">
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" min="0"
-                                                                        class="invoice-table-input form-control"
-                                                                        name=<?="tax".$i?> value="<?= $row['tax'] ?>">
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" min="0"
@@ -365,11 +359,6 @@
                                                                     <input type="number" min="0" value="0"
                                                                         class="invoice-table-input form-control"
                                                                         name="discount" .<?=$i?>>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" min="0" value="0"
-                                                                        class="invoice-table-input form-control"
-                                                                        name="tax" .<?=$i?>>
                                                                 </td>
                                                                 <td>
                                                                     <input type="number" value="0"
