@@ -132,14 +132,14 @@
                                                 <label class="col-form-label">Current PIC Name</label>
                                                 <div class="input-group">
                                                     <select class="form-select" name="pic_name">
-                                                        <option value="1"
-                                                            <?= (1 == $record['pic_name'] ? 'selected="selected"' : '') ?>>
-                                                            current pic name one
-                                                        </option>
-                                                        <option value="2"
-                                                            <?= (2 == $record['pic_name'] ? 'selected="selected"' : '') ?>>
-                                                            current pic name two
-                                                        </option>
+                                                        <?php
+                                                        foreach ($staffs as $staff) {
+                                                        ?>
+                                                        <option value="<?= $staff['name'] ?>">
+                                                            <?= $staff['name'] ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -403,30 +403,37 @@
                                                     <div class="invoice-fields">
                                                         <div class="form-group">
                                                             <label>Sub Total</label>
-                                                            <input type="text" id="sum_sub_total"
-                                                                class="form-control" />
+                                                            <input type="text" id="sum_sub_total" name="sum_sub_total"
+                                                                class="form-control"
+                                                                value="<?= $record['sum_sub_total'] ?>" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Discount</label>
-                                                            <input type="text" id="sum_discount" class="form-control" />
+                                                            <input type="text" id="sum_discount" name="sum_discount"
+                                                                class="form-control"
+                                                                value="<?= $record['sum_discount'] ?>" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Tax</label>
-                                                            <input type="text" id="sum_tax" class="form-control" />
+                                                            <input type="text" id="sum_tax" name="sum_tax"
+                                                                class="form-control"
+                                                                value="<?= $record['sum_tax'] ?>" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Adjustment</label>
-                                                            <input type="text" id="sum_adjustment"
-                                                                class="form-control" />
+                                                            <input type="text" id="sum_adjustment" name="sum_adjustment"
+                                                                class="form-control"
+                                                                value="<?= $record['sum_adjustment'] ?>" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Grand Total</label>
                                                             <input type="text" id="sum_grand_total"
-                                                                class="form-control" />
+                                                                name="sum_grand_total" class="form-control"
+                                                                value="<?= $record['sum_grand_total'] ?>" />
                                                         </div>
                                                     </div>
                                                 </div>

@@ -156,10 +156,12 @@ $("#addProducts").click(function() {
     var message = "";
     var productNames = [];
     var productIds = [];
+    var productPrices = [];
     $("#products_table input[type=checkbox]:checked").each(function() {
         var row = $(this).closest("tr")[0];
         productNames.push(row.cells[2].innerHTML);
-        productIds.push(row.cells[4].innerHTML);
+        productPrices.push(row.cells[3].innerHTML);
+        productIds.push(row.cells[5].innerHTML);
     });
     if (productNames.length == 0) {
         alert("Choose one product at least.");
@@ -177,15 +179,14 @@ $("#addProducts").click(function() {
         $('#addr' + i).html("<td>" + (i) +
             "</td><td><textarea cols='30' rows='1' class='form-control' name='productName" + i +
             "'  placeholder='description'>" + productNames[index] +
-            "</textarea></td><td><input type='number' min='0' value='0' name='listPrice" +
+            "</textarea></td><td><input type='number' min='0' value=" + productPrices[index] +
+            " name='listPrice" +
             i +
             "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0'' name='quantity" +
             i +
             "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='amount" +
             i +
             "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='discount" +
-            i +
-            "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='tax" +
             i +
             "' class='invoice-table-input form-control'/></td><td><input type='number' min='0' value='0' name='total" +
             i +
@@ -199,6 +200,10 @@ $("#addProducts").click(function() {
         i++;
     }
 
+    $.fn.updateSummary();
+});
+
+$(document).mousedown(function(event) {
     $.fn.updateSummary();
 });
 
@@ -227,8 +232,6 @@ $("#currency_name").on('change', function() {
                 $('#addr' + j).find("[name='amount" + j + "']").val($val * result[1]);
                 $val = $('#addr' + j).find("[name='discount" + j + "']").val();
                 $('#addr' + j).find("[name='discount" + j + "']").val($val * result[1]);
-                $val = $('#addr' + j).find("[name='tax" + j + "']").val();
-                $('#addr' + j).find("[name='tax" + j + "']").val($val * result[1]);
                 $val = $('#addr' + j).find("[name='total" + j + "']").val();
                 $('#addr' + j).find("[name='total" + j + "']").val($val * result[1]);
             }
@@ -244,7 +247,7 @@ $.fn.updateSummary = function() {
     i = parseInt(i.replace('addr', ''));
     var subTotal = 0;
     var discount = 0;
-    var tax = 0;
+    var tax = $('#sum_tax').val();
     var adjustment = 0;
     var grandTotal = 0;
     var j = i;

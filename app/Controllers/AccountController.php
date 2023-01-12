@@ -136,7 +136,7 @@ class accountController extends BaseController
             as contact from contacts c where c.AccountName = a.accountname) as contact from accounts a where a.id =" . $id)->getResult();
 
         $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title' => 'Accounts', 'li_1' => 'Dashboard', 'li_2' => 'Update Accounts']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Update Account', 'li_1' => 'Dashboard', 'li_2' => 'Update Account']);
         $data['account'] = $accountdata;
         $data['updatedby'] = $this->session->get('user_id');
         $contact = new Contact();

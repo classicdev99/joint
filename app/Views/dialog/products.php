@@ -17,6 +17,7 @@
                                     </th>
                                     <th>Product Code</th>
                                     <th>Product Name</th>
+                                    <th>Price</th>
                                     <th>Description</th>
                                 </tr>
                             </thead>
@@ -27,6 +28,7 @@
                                     </td>
                                     <td><?= $row['product_code'] ?></td>
                                     <td><?= $row['product_name'] ?></td>
+                                    <td><?= $row['unit_price'] ?></td>
                                     <td><?= $row['description'] ?></td>
                                     <td hidden><?= $row['id'] ?></td>
                                 </tr>

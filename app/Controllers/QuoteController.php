@@ -11,6 +11,7 @@ use App\Models\Contact;
 
 use App\Models\Quoteinformation;
 use App\Models\Masterpaymentterm;
+use App\Models\Staff;
 class QuoteController extends BaseController
 {
     public function __construct()
@@ -41,7 +42,8 @@ class QuoteController extends BaseController
         $data['accounts'] = $contact->getAllAccounts();
         $Masterpaymentterm=new Masterpaymentterm();
         $data['paymentterms'] = $Masterpaymentterm->findAll();
-
+        $staff = new Staff();
+        $data['staffs'] = $staff->getStaffs();
         $model = new Product();
 
         $data['products'] = $model->getProducts();
@@ -66,6 +68,11 @@ class QuoteController extends BaseController
             'deal_name'          => $this->request->getPost('deal_name'),
             'validity'     => $this->request->getPost('validity'),
             'cutom_quote_date'      => $this->request->getPost('cutom_quote_date'),
+            'sum_sub_total'     => $this->request->getPost('sum_sub_total'),
+            'sum_discount'     => $this->request->getPost('sum_discount'),
+            'sum_tax'     => $this->request->getPost('sum_tax'),
+            'sum_adjustment'     => $this->request->getPost('sum_adjustment'),
+            'sum_grand_total'     => $this->request->getPost('sum_grand_total'),
         ];
 
         $quote_id = $model->index($quote);
@@ -130,7 +137,8 @@ class QuoteController extends BaseController
         $data['accounts'] = $contact->getAllAccounts();
         $Masterpaymentterm=new Masterpaymentterm();
         $data['paymentterms'] = $Masterpaymentterm->findAll();
-
+        $staff = new Staff();
+        $data['staffs'] = $staff->getStaffs();
         $model = new Product();
 
         $data['products'] = $model->getProducts();

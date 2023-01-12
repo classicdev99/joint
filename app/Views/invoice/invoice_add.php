@@ -346,27 +346,32 @@
                                                 <div class="invoice-fields">
                                                     <div class="form-group">
                                                         <label>Sub Total</label>
-                                                        <input type="text" id="sum_sub_total" class="form-control" />
+                                                        <input type="text" id="sum_sub_total" name="sum_sub_total"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Discount</label>
-                                                        <input type="text" id="sum_discount" class="form-control" />
+                                                        <input type="text" id="sum_discount" name="sum_discount"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Tax</label>
-                                                        <input type="text" id="sum_tax" class="form-control" />
+                                                        <input type="text" id="sum_tax" name="sum_tax"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Adjustment</label>
-                                                        <input type="text" id="sum_adjustment" class="form-control" />
+                                                        <input type="text" id="sum_adjustment" name="sum_adjustment"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Grand Total</label>
-                                                        <input type="text" id="sum_grand_total" class="form-control" />
+                                                        <input type="text" id="sum_grand_total" name="sum_grand_total"
+                                                            class="form-control" />
                                                     </div>
                                                 </div>
                                             </div>

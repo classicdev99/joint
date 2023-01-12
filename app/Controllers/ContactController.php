@@ -75,7 +75,7 @@ class contactController extends BaseController
         $model = new Contact();
 
         $data['title_meta'] = view('layouts/title-meta', ['title' => 'Dashboard']);
-        $data['page_title'] = view('layouts/page-title', ['title' => 'Create Contact', 'li_1' => 'Dashboard', 'li_2' => 'Contacts', 'li_3' => 'Create Contact']);
+        $data['page_title'] = view('layouts/page-title', ['title' => 'Update Contact', 'li_1' => 'Dashboard', 'li_2' => 'Contacts', 'li_3' => 'Update Contact']);
         $data['record'] = $model->editContact($id);
         $data['contacts'] = $model->getContacts();
         $c = new Contact();
