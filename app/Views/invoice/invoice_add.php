@@ -104,7 +104,7 @@
                                             <h6 class="mb-3">invoice Information</h6>
 
                                             <div class="col-md-6">
-                                                <label class="col-form-label">Product Order</label>
+                                                <label class="col-form-label">Customer PO number</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
                                                     <input type="text" class="form-control" name="productOrder">
@@ -187,7 +187,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6"></div>
 
                                             <!-- <div class="col-md-6">
                                                 <label class="col-form-label">Contact Name</label>
@@ -217,38 +216,36 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6"></div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Payment Term</label>
                                                 <div class="input-group">
                                                     <select class="form-select" name="paymentTerm">
-                                                        <option value="tdo name one">tdo name one</option>
-                                                        <option value="tdo name two">tdo name two</option>
+                                                        <!-- <option value="tdo name one">tdo name one</option>
+                                                        <option value="tdo name two">tdo name two</option> -->
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6"></div>
+
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Delivery Terms</label>
                                                 <div class="input-group">
                                                     <select class="form-select" name="deliveryTerms">
-                                                        <option value="tdo name one">tdo name one</option>
-                                                        <option value="tdo name two">tdo name two</option>
+                                                        <!-- <option value="tdo name one">tdo name one</option>
+                                                        <option value="tdo name two">tdo name two</option> -->
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6"></div>
+
 
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Current PIC Name</label>
                                                 <div class="input-group">
                                                     <select class="form-select" name="currentPicName">
-                                                        <option value="tdo name one">tdo name one</option>
-                                                        <option value="tdo name two">tdo name two</option>
+                                                        <!-- <option value="tdo name one">tdo name one</option>
+                                                        <option value="tdo name two">tdo name two</option> -->
                                                     </select>
                                                 </div>
                                             </div>

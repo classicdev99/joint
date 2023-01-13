@@ -129,8 +129,8 @@
                                                 <label class="col-form-label">Account Name</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select name="account_name" class="form-select">
-                                                        <option hidden>-None-</option>
+                                                    <select name="account_name" class="form-select" id="account_name">
+                                                        <option hidden>-Select Account-</option>
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
@@ -273,7 +273,7 @@
                                                         <a onclick="showProducts()" class="btn btn-primary cst-btn">+
                                                             Add Products</a>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <!-- <div class="col-md-2">
                                                         <label class="col-form-label">Currency</label>
                                                         <div class="input-group">
                                                             <select name="currency_name" id="currency_name"
@@ -286,7 +286,7 @@
                                                         <input type="number" value="1" min="0.00"
                                                             class="invoice-table-input form-control"
                                                             name="currency_value" id="currency_value">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="invoice-fields">
                                                         <div class="form-group">
                                                             <label>Sub Total</label>
@@ -383,6 +383,7 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
+    <?= $this->include('script/quote_account') ?>
     <script type="text/javascript">
     var now = new Date();
 

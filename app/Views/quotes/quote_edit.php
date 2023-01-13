@@ -103,16 +103,15 @@
 
                                         <div class="row mb-5">
                                             <h6 class="mb-3">Quote Information</h6>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Subject</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <input value="<?= $record['subject'] ?>" type="text"
                                                         class="form-control" name="subject">
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Current PIC Name</label>
                                                 <div class="input-group">
@@ -132,9 +131,10 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Account Name</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
-                                                    <select name="account_name" class="form-select">
-                                                        <option hidden>-None-</option>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
+                                                    <select name="account_name" class="form-select" id="account_name">
+                                                        <option hidden>-Select Account-</option>
                                                         <?php
                                                         foreach ($accounts as $acc) {
                                                         ?>
@@ -163,7 +163,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Contact Name</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <select name="contact_name" class="form-select">
                                                         <option hidden>-None-</option>
                                                         <?php
@@ -206,7 +207,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Deal Name</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <input value="<?= $record['deal_name'] ?>" type="text"
                                                         class="form-control" name="deal_name">
                                                 </div>
@@ -242,7 +244,8 @@
                                             <div class="col-md-6">
                                                 <label class="col-form-label">Custom Quotation Date</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend bg-danger" style="width:3px;"></div>
+                                                    <div class="input-group-prepend bg-danger" style="width:3px;">
+                                                    </div>
                                                     <input value="<?= $record['cutom_quote_date'] ?>" type="date"
                                                         class="form-control" name="cutom_quote_date">
                                                 </div>
@@ -363,7 +366,7 @@
                                                         <a onclick="showProducts()" class="btn btn-primary cst-btn">+
                                                             Add Products</a>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <!-- <div class="col-md-2">
                                                         <label class="col-form-label">Currency</label>
                                                         <div class="input-group">
                                                             <select name="currency_name" id="currency_name"
@@ -376,7 +379,7 @@
                                                         <input type="number" value="1" min="0.00"
                                                             class="invoice-table-input form-control"
                                                             name="currency_value" id="currency_value">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="invoice-fields">
                                                         <div class="form-group">
                                                             <label>Sub Total</label>
@@ -478,7 +481,7 @@
     <!-- END layout-wrapper -->
 
     <?= $this->include('layouts/script') ?>
-
+    <?= $this->include('script/quote_account') ?>
 </body>
 
 </html>
